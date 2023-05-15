@@ -332,8 +332,6 @@ class Dashboard extends CI_Controller
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
-
-
 	public function pengaduan_balas($id)
 	{
 		$where = array(
