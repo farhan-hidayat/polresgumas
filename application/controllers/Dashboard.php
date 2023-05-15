@@ -518,7 +518,7 @@ class Dashboard extends CI_Controller
 	// CRUD GALLERY
 	public function gallery()
 	{
-		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori=kategori_id and author=id order by gallery_id desc")->result();
+		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id order by gallery.id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/gallery/v_gallery', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -526,7 +526,7 @@ class Dashboard extends CI_Controller
 
 	public function gallery_tambah()
 	{
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Galeri' order by kategori_id desc")->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Galeri' order by id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/gallery/v_gallery_tambah', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -535,7 +535,7 @@ class Dashboard extends CI_Controller
 	public function gallery_aksi()
 	{
 		// Wajib isi judul,konten dan kategori
-		$this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[gallery.judul]');
+		$this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[gallery.judul_gallery]');
 		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
 
 		// Membuat gambar wajib di isi
@@ -563,12 +563,12 @@ class Dashboard extends CI_Controller
 				$status = $this->input->post('status');
 
 				$data = array(
-					'tanggal' => $tanggal,
-					'judul' => $judul,
-					'sampul' => $sampul,
-					'author' => $author,
-					'artikel_kategori' => $kategori,
-					'status' => $status,
+					'tanggal_gallery' => $tanggal,
+					'judul_gallery' => $judul,
+					'sampul_gallery' => $sampul,
+					'pengguna_gallery' => $author,
+					'kategori_gallery' => $kategori,
+					'status_gallery' => $status,
 				);
 
 				$this->m_data->insert_data($data, 'gallery');
@@ -594,10 +594,10 @@ class Dashboard extends CI_Controller
 	public function gallery_edit($id)
 	{
 		$where = array(
-			'gallery_id' => $id
+			'id' => $id
 		);
 		$data['gallery'] = $this->m_data->edit_data($where, 'gallery')->result();
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Galeri' order by kategori_id desc")->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Galeri' order by id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/gallery/v_gallery_edit', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -619,13 +619,13 @@ class Dashboard extends CI_Controller
 			$status = $this->input->post('status');
 
 			$where = array(
-				'gallery_id' => $id
+				'id' => $id
 			);
 
 			$data = array(
-				'judul' => $judul,
-				'kategori' => $kategori,
-				'status' => $status,
+				'judul_gallery' => $judul,
+				'kategori_gallery' => $kategori,
+				'status_gallery' => $status,
 			);
 
 			$this->m_data->update_data($where, $data, 'gallery');
@@ -643,7 +643,7 @@ class Dashboard extends CI_Controller
 					$gambar = $this->upload->data();
 
 					$data = array(
-						'sampul' => $gambar['file_name'],
+						'sampul_gallery' => $gambar['file_name'],
 					);
 
 					$a = $this->m_data->edit_data($where, 'gallery')->row();
@@ -657,10 +657,10 @@ class Dashboard extends CI_Controller
 					$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
 
 					$where = array(
-						'gallery_id' => $id
+						'id' => $id
 					);
 					$data['gallery'] = $this->m_data->edit_data($where, 'gallery')->result();
-					$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Galeri' order by kategori_id desc")->result();
+					$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Galeri' order by kategori_id desc")->result();
 					$this->load->view('dashboard/layout/v_header');
 					$this->load->view('dashboard/gallery/v_gallery_edit', $data);
 					$this->load->view('dashboard/layout/v_footer');
@@ -671,10 +671,10 @@ class Dashboard extends CI_Controller
 		} else {
 			$id = $this->input->post('id');
 			$where = array(
-				'gallery_id' => $id
+				'id' => $id
 			);
 			$data['gallery'] = $this->m_data->edit_data($where, 'gallery')->result();
-			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Galeri' order by kategori_id desc")->result();
+			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Galeri' order by kategori_id desc")->result();
 			$this->load->view('dashboard/layout/v_header');
 			$this->load->view('dashboard/gallery/v_gallery_edit', $data);
 			$this->load->view('dashboard/layout/v_footer');
@@ -684,7 +684,7 @@ class Dashboard extends CI_Controller
 	public function gallery_hapus($id)
 	{
 		$where = array(
-			'gallery_id' => $id
+			'id' => $id
 		);
 
 		$a = $this->m_data->edit_data($where, 'gallery')->row();

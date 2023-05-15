@@ -37,15 +37,17 @@
 				<div class="col-lg-3">
 					<div class="card">
 						<div class="card-body">
-						<div class="form-group">
+							<div class="form-group">
 								<label>Kategori</label>
 								<select class="form-control" name="kategori">
 									<option value="">- Pilih Kategori</option>
-									<?php foreach($kategori as $k){ ?>
-										<option <?php if(set_value('kategori') == $k->kategori_id){echo "selected='selected'";} ?> value="<?php echo $k->kategori_id ?>"><?php echo $k->kategori_nama; ?></option>
+									<?php foreach ($kategori as $k) { ?>
+										<option <?php if (set_value('kategori') == $k->id) {
+													echo "selected='selected'";
+												} ?> value="<?php echo $k->id ?>"><?php echo $k->nama_kategori; ?></option>
 									<?php } ?>
 								</select>
-								<br/>
+								<br />
 								<?php echo form_error('kategori'); ?>
 							</div>
 
