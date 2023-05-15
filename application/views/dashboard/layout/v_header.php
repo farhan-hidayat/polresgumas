@@ -190,7 +190,7 @@
             if ($this->session->userdata('level') == "admin") {
             ?>
               <li class="nav-item">
-                <a href="<?php echo base_url() . 'dashboard/pengaturan' ?>" class="nav-link <?= $this->uri->segment(2) == 'pengaturan' ? 'active' : '' ?>">
+                <a href="<?php echo base_url() . 'dashboard/pengaduan' ?>" class="nav-link <?= $this->uri->segment(2) == 'pengaduan' ? 'active' : '' ?>">
                   <i class="nav-icon fa fa-envelope"></i>
                   <p>PENGADUAN</p>
                 </a>

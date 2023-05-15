@@ -321,6 +321,79 @@ class Dashboard extends CI_Controller
 	}
 	// END CRUD KATEGORI
 
+	// CRUD pengaduan
+	public function pengaduan()
+	{
+		$data = array(
+			'pengaduan' => $this->m_data->get_data('pengaduan')->result()
+		);
+		$this->load->view('dashboard/layout/v_header', $data);
+		$this->load->view('dashboard/pengaduan/v_pengaduan', $data);
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+
+
+	public function pengaduan_balas($id)
+	{
+		$where = array(
+			'id' => $id
+		);
+		$data['pengaduan'] = $this->m_data->edit_data($where, 'pengaduan')->result();
+		$this->load->view('dashboard/layout/v_header');
+		$this->load->view('dashboard/pengaduan/v_pengaduan_balas', $data);
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+	public function pengaduan_update()
+	{
+		$this->form_validation->set_rules('pengaduan', 'pengaduan', 'required');
+		$this->form_validation->set_rules('ket', 'Ket', 'required');
+
+		if ($this->form_validation->run() != false) {
+
+			$id = $this->input->post('id');
+			$pengaduan = $this->input->post('pengaduan');
+			$ket = $this->input->post('ket');
+
+			$where = array(
+				'id' => $id
+			);
+
+			$data = array(
+				'nama_pengaduan' => $pengaduan,
+				'ket_pengaduan' => $ket,
+				'slug_pengaduan' => strtolower(url_title($pengaduan))
+			);
+
+			$this->m_data->update_data($where, $data, 'pengaduan');
+
+			redirect(base_url() . 'dashboard/pengaduan/pengaduan');
+		} else {
+
+			$id = $this->input->post('id');
+			$where = array(
+				'pengaduan_id' => $id
+			);
+			$data['pengaduan'] = $this->m_data->edit_data($where, 'pengaduan')->result();
+			$this->load->view('dashboard/layout/v_header');
+			$this->load->view('dashboard/pengaduan/v_pengaduan_edit', $data);
+			$this->load->view('dashboard/layout/v_footer');
+		}
+	}
+
+	public function pengaduan_hapus($id)
+	{
+		$where = array(
+			'id' => $id
+		);
+
+		$this->m_data->delete_data($where, 'pengaduan');
+
+		redirect(base_url() . 'dashboard/pengaduan/pengaduan');
+	}
+	// END CRUD pengaduan
+
 
 	// CRUD ARTIKEL
 	public function artikel()
