@@ -42,20 +42,20 @@
 									?>
 										<tr>
 											<td><?php echo $no++; ?></td>
-											<td><?php echo date('d/m/Y H:i', strtotime($a->artikel_tanggal)); ?></td>
+											<td><?php echo date('d/m/Y H:i', strtotime($a->tanggal_artikel)); ?></td>
 											<td>
-												<?php echo $a->artikel_judul; ?>
+												<?php echo $a->judul_artikel; ?>
 												<br />
 												<small class="text-muted">
-													<?php echo base_url() . "" . $a->artikel_slug; ?>
+													<?php echo base_url() . "" . $a->slug_artikel; ?>
 												</small>
 											</td>
-											<td><?php echo $a->pengguna_nama; ?></td>
-											<td><?php echo $a->kategori_nama; ?></td>
-											<td><img width="100%" class="img-responsive" src="<?php echo base_url() . '/gambar/artikel/' . $a->artikel_sampul; ?>"></td>
+											<td><?php echo $a->nama; ?></td>
+											<td><?php echo $a->nama_kategori; ?></td>
+											<td><img width="100%" class="img-responsive" src="<?php echo base_url() . '/gambar/artikel/' . $a->sampul_artikel; ?>"></td>
 											<td>
 												<?php
-												if ($a->artikel_status == "publish") {
+												if ($a->status_artikel == "Publish") {
 													echo "<span class='label label-success'>Publish</span>";
 												} else {
 													echo "<span class='label label-danger'>Draft</span>";
@@ -64,22 +64,22 @@
 
 											</td>
 											<td>
-												<a target="_blank" href="<?php echo base_url() . $a->artikel_slug; ?>" class="btn btn-success btn-sm"> <i class="fa fa-eye"></i> </a>
+												<a target="_blank" href="<?php echo base_url() . $a->slug_artikel; ?>" class="btn btn-success btn-sm"> <i class="fa fa-eye"></i> </a>
 												<?php
 												// cek apakah penggun yang login adalah penulis
 												if ($this->session->userdata('level') == "penulis") {
 													// jika penulis, maka cek apakah penulis artikel ini adalah si pengguna atau bukan
-													if ($this->session->userdata('id') == $a->artikel_author) {
+													if ($this->session->userdata('id') == $a->pengguna_artikel) {
 												?>
-														<a href="<?php echo base_url() . 'dashboard/artikel_edit/' . $a->artikel_id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-														<a href="<?php echo base_url() . 'dashboard/artikel_hapus/' . $a->artikel_id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/artikel_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/artikel_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 													<?php
 													}
 												} else {
 													// jika yang login adalah admin
 													?>
-													<a href="<?php echo base_url() . 'dashboard/artikel_edit/' . $a->artikel_id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-													<a href="<?php echo base_url() . 'dashboard/artikel_hapus/' . $a->artikel_id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/artikel_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/artikel_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 												<?php
 												}
 												?>

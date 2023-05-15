@@ -325,7 +325,7 @@ class Dashboard extends CI_Controller
 	// CRUD ARTIKEL
 	public function artikel()
 	{
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE artikel_kategori=kategori_id and pengguna_artikel=id order by artikel_id desc")->result();
+		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id order by artikel.id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/artikel/v_artikel', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -333,7 +333,7 @@ class Dashboard extends CI_Controller
 
 	public function artikel_tambah()
 	{
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Artikel' order by kategori_id desc")->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/artikel/v_artikel_tambah', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -342,7 +342,7 @@ class Dashboard extends CI_Controller
 	public function artikel_aksi()
 	{
 		// Wajib isi judul,konten dan kategori
-		$this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[artikel.artikel_judul]');
+		$this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[artikel.judul_artikel]');
 		$this->form_validation->set_rules('konten', 'Konten', 'required');
 		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
 
@@ -373,14 +373,14 @@ class Dashboard extends CI_Controller
 				$status = $this->input->post('status');
 
 				$data = array(
-					'artikel_tanggal' => $tanggal,
-					'artikel_judul' => $judul,
-					'artikel_slug' => $slug,
-					'artikel_konten' => $konten,
-					'artikel_sampul' => $sampul,
+					'tanggal_artikel' => $tanggal,
+					'judul_artikel' => $judul,
+					'slug_artikel' => $slug,
+					'konten_artikel' => $konten,
+					'sampul_artikel' => $sampul,
 					'pengguna_artikel' => $author,
-					'artikel_kategori' => $kategori,
-					'artikel_status' => $status,
+					'kategori_artikel' => $kategori,
+					'status_artikel' => $status,
 				);
 
 				$this->m_data->insert_data($data, 'artikel');
@@ -396,7 +396,7 @@ class Dashboard extends CI_Controller
 				$this->load->view('dashboard/layout/v_footer');
 			}
 		} else {
-			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Artikel' order by kategori_id desc")->result();
+			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
 			$this->load->view('dashboard/layout/v_header');
 			$this->load->view('dashboard/artikel/v_artikel_tambah', $data);
 			$this->load->view('dashboard/layout/v_footer');
@@ -407,10 +407,10 @@ class Dashboard extends CI_Controller
 	public function artikel_edit($id)
 	{
 		$where = array(
-			'artikel_id' => $id
+			'id' => $id
 		);
 		$data['artikel'] = $this->m_data->edit_data($where, 'artikel')->result();
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Artikel' order by kategori_id desc")->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/artikel/v_artikel_edit', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -435,15 +435,15 @@ class Dashboard extends CI_Controller
 			$status = $this->input->post('status');
 
 			$where = array(
-				'artikel_id' => $id
+				'id' => $id
 			);
 
 			$data = array(
-				'artikel_judul' => $judul,
-				'artikel_slug' => $slug,
-				'artikel_konten' => $konten,
-				'artikel_kategori' => $kategori,
-				'artikel_status' => $status,
+				'judul_artikel' => $judul,
+				'slug_artikel' => $slug,
+				'konten_artikel' => $konten,
+				'kategori_artikel' => $kategori,
+				'status_artikel' => $status,
 			);
 
 			$this->m_data->update_data($where, $data, 'artikel');
@@ -461,7 +461,7 @@ class Dashboard extends CI_Controller
 					$gambar = $this->upload->data();
 
 					$data = array(
-						'artikel_sampul' => $gambar['file_name'],
+						'sampul_artikel' => $gambar['file_name'],
 					);
 
 					$a = $this->m_data->edit_data($where, 'artikel')->row();
@@ -475,7 +475,7 @@ class Dashboard extends CI_Controller
 					$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
 
 					$where = array(
-						'artikel_id' => $id
+						'id' => $id
 					);
 					$data['artikel'] = $this->m_data->edit_data($where, 'artikel')->result();
 					$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Artikel' order by kategori_id desc")->result();
@@ -489,10 +489,10 @@ class Dashboard extends CI_Controller
 		} else {
 			$id = $this->input->post('id');
 			$where = array(
-				'artikel_id' => $id
+				'id' => $id
 			);
 			$data['artikel'] = $this->m_data->edit_data($where, 'artikel')->result();
-			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Artikel' order by kategori_id desc")->result();
+			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
 			$this->load->view('dashboard/layout/v_header');
 			$this->load->view('dashboard/artikel/v_artikel_edit', $data);
 			$this->load->view('dashboard/layout/v_footer');
