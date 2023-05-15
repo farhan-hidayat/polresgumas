@@ -10,29 +10,29 @@
 
 		<div class="row">
 			<div class="col-lg-6">
-				<a href="<?php echo base_url().'dashboard/pengguna'; ?>" class="btn btn-sm btn-primary">Kembali</a>
-				
-				<br/>
-				<br/>
+				<a href="<?php echo base_url() . 'dashboard/pengguna'; ?>" class="btn btn-sm btn-primary">Kembali</a>
+
+				<br />
+				<br />
 
 				<div class="card">
 					<div class="card-header">
 						<h3 class="card-title">Konfirmasi Hapus</h3>
 					</div>
 					<div class="card-body">
-						
-						<p><b><?php echo $pengguna_hapus->pengguna_nama; ?></b> akan dihapus. dan semua artikel yang ditulis oleh <b><?php echo $pengguna_hapus->pengguna_nama; ?></b> akan dipindahkan ke ?</p>
-						
+
+						<p><b><?php echo $hapus->nama; ?></b> akan dihapus. dan semua artikel yang ditulis oleh <b><?php echo $hapus->nama; ?></b> akan dipindahkan ke ?</p>
+
 						<form method="post" action="<?php echo base_url('dashboard/pengguna_hapus_aksi') ?>">
 							<div class="card-body">
 								<div class="form-group">
 									<label>Nama Pengguna</label>
-									<input type="hidden" name="pengguna_hapus" value="<?php echo $pengguna_hapus->pengguna_id; ?>">
+									<input type="hidden" name="hapus" value="<?php echo $hapus->id; ?>">
 
-									<select class="form-control" name="pengguna_tujuan" required="required">
+									<select class="form-control" name="tujuan" required="required">
 										<option value="">- Pilih Level -</option>
-										<?php foreach($pengguna_lain as $pl){ ?>
-											<option value="<?php echo $pl->pengguna_id ?>"><?php echo $pl->pengguna_nama; ?></option>
+										<?php foreach ($lain as $pl) { ?>
+											<option value="<?php echo $pl->id ?>"><?php echo $pl->nama; ?></option>
 										<?php } ?>
 									</select>
 								</div>

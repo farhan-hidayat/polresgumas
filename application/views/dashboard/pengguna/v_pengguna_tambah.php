@@ -10,17 +10,17 @@
 
 		<div class="row">
 			<div class="col-lg-6">
-				<a href="<?php echo base_url().'dashboard/pengguna'; ?>" class="btn btn-sm btn-primary">Kembali</a>
-				
-				<br/>
-				<br/>
+				<a href="<?php echo base_url() . 'dashboard/pengguna'; ?>" class="btn btn-sm btn-primary">Kembali</a>
+
+				<br />
+				<br />
 
 				<div class="card">
 					<div class="card-header">
 						<h3 class="card-title">Pengguna</h3>
 					</div>
 					<div class="card-body">
-						
+
 						<form method="post" action="<?php echo base_url('dashboard/pengguna_aksi') ?>">
 							<div class="card-body">
 								<div class="form-group">
@@ -49,8 +49,6 @@
 										<option value="">- Pilih Level -</option>
 										<option value="admin">Admin</option>
 										<option value="penulis">Penulis</option>
-										<option value="auditor">Auditor</option>
-										<option value="auditee">Auditee</option>
 									</select>
 									<?php echo form_error('level'); ?>
 								</div>

@@ -325,7 +325,7 @@ class Dashboard extends CI_Controller
 	// CRUD ARTIKEL
 	public function artikel()
 	{
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE artikel_kategori=kategori_id and artikel_author=id order by artikel_id desc")->result();
+		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE artikel_kategori=kategori_id and pengguna_artikel=id order by artikel_id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/artikel/v_artikel', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -378,7 +378,7 @@ class Dashboard extends CI_Controller
 					'artikel_slug' => $slug,
 					'artikel_konten' => $konten,
 					'artikel_sampul' => $sampul,
-					'artikel_author' => $author,
+					'pengguna_artikel' => $author,
 					'artikel_kategori' => $kategori,
 					'artikel_status' => $status,
 				);
@@ -862,15 +862,15 @@ class Dashboard extends CI_Controller
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
-	public function tambah()
+	public function pengguna_tambah()
 	{
 		// check_admin();
 		$this->load->view('dashboard/layout/v_header');
-		$this->load->view('dashboard/pengguna/v_tambah');
+		$this->load->view('dashboard/pengguna/v_pengguna_tambah');
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
-	public function aksi()
+	public function pengguna_aksi()
 	{
 		// Wajib isi
 		$this->form_validation->set_rules('nama', 'Nama Pengguna', 'required');
@@ -904,12 +904,12 @@ class Dashboard extends CI_Controller
 			redirect(base_url() . 'dashboard/pengguna');
 		} else {
 			$this->load->view('dashboard/layout/v_header');
-			$this->load->view('dashboard/pengguna/v_tambah');
+			$this->load->view('dashboard/pengguna/v_pengguna_tambah');
 			$this->load->view('dashboard/layout/v_footer');
 		}
 	}
 
-	public function edit($id)
+	public function pengguna_edit($id)
 	{
 		// check_admin();
 		$where = array(
@@ -917,12 +917,12 @@ class Dashboard extends CI_Controller
 		);
 		$data['pengguna'] = $this->m_data->edit_data($where, 'pengguna')->result();
 		$this->load->view('dashboard/layout/v_header');
-		$this->load->view('dashboard/pengguna/v_edit', $data);
+		$this->load->view('dashboard/pengguna/v_pengguna_edit', $data);
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
 
-	public function update()
+	public function pengguna_update()
 	{
 		// Wajib isi
 		$this->form_validation->set_rules('nama', 'Nama Pengguna', 'required');
@@ -975,12 +975,12 @@ class Dashboard extends CI_Controller
 			);
 			$data['pengguna'] = $this->m_data->edit_data($where, 'pengguna')->result();
 			$this->load->view('dashboard/layout/v_header');
-			$this->load->view('dashboard/pengguna/v_edit', $data);
+			$this->load->view('dashboard/pengguna/v_pengguna_edit', $data);
 			$this->load->view('dashboard/layout/v_footer');
 		}
 	}
 
-	public function hapus($id)
+	public function pengguna_hapus($id)
 	{
 		$where = array(
 			'id' => $id
@@ -988,11 +988,11 @@ class Dashboard extends CI_Controller
 		$data['hapus'] = $this->m_data->edit_data($where, 'pengguna')->row();
 		$data['lain'] = $this->db->query("SELECT * FROM pengguna WHERE id != $id")->result();
 		$this->load->view('dashboard/layout/v_header');
-		$this->load->view('dashboard/pengguna/v_hapus', $data);
+		$this->load->view('dashboard/pengguna/v_pengguna_hapus', $data);
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
-	public function hapus_aksi()
+	public function pengguna_hapus_aksi()
 	{
 		$hapus = $this->input->post('hapus');
 		$tujuan = $this->input->post('tujuan');
@@ -1006,11 +1006,11 @@ class Dashboard extends CI_Controller
 
 		// pindahkan semua artikel pengguna yang dihapus ke pengguna yang dipilih
 		$w = array(
-			'artikel_author' => $hapus
+			'pengguna_artikel' => $hapus
 		);
 
 		$d = array(
-			'artikel_author' => $tujuan
+			'pengguna_artikel' => $tujuan
 		);
 
 		$this->m_data->update_data($w, $d, 'artikel');
