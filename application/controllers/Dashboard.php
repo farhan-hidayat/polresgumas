@@ -209,9 +209,7 @@ class Dashboard extends CI_Controller
 	// CRUD KATEGORI
 	public function aplikasi()
 	{
-		$data = array(
-			'aplikasi' => $this->m_data->get_data('aplikasi')->result()
-		);
+		$data['aplikasi'] = $this->db->query("SELECT * FROM aplikasi,kategori WHERE kategori_aplikasi=kategori.id order by aplikasi.id desc")->result();
 		$this->load->view('dashboard/layout/v_header', $data);
 		$this->load->view('dashboard/aplikasi/v_aplikasi', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -229,7 +227,8 @@ class Dashboard extends CI_Controller
 	public function aplikasi_aksi()
 	{
 		$this->form_validation->set_rules('aplikasi', 'aplikasi', 'required');
-		$this->form_validation->set_rules('ket', 'Ket', 'required');
+		$this->form_validation->set_rules('link', 'link', 'required');
+		$this->form_validation->set_rules('kategori', 'kategori', 'required');
 
 		if ($this->form_validation->run() != false) {
 
@@ -241,7 +240,6 @@ class Dashboard extends CI_Controller
 			$data = array(
 				'nama_aplikasi' => $aplikasi,
 				'kategori_aplikasi' => $kategori,
-				'ket_aplikasi' => $ket,
 				'link_aplikasi' => $link,
 				'slug_aplikasi' => strtolower(
 					url_title($aplikasi)
@@ -264,6 +262,7 @@ class Dashboard extends CI_Controller
 			'id' => $id
 		);
 		$data['aplikasi'] = $this->m_data->edit_data($where, 'aplikasi')->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Aplikasi' order by id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/aplikasi/v_aplikasi_edit', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -272,7 +271,8 @@ class Dashboard extends CI_Controller
 	public function aplikasi_update()
 	{
 		$this->form_validation->set_rules('aplikasi', 'aplikasi', 'required');
-		$this->form_validation->set_rules('ket', 'Ket', 'required');
+		$this->form_validation->set_rules('link', 'link', 'required');
+		$this->form_validation->set_rules('kategori', 'kategori', 'required');
 
 		if ($this->form_validation->run() != false) {
 
@@ -289,7 +289,6 @@ class Dashboard extends CI_Controller
 			$data = array(
 				'nama_aplikasi' => $aplikasi,
 				'kategori_aplikasi' => $kategori,
-				'ket_aplikasi' => $ket,
 				'link_aplikasi' => $link,
 				'slug_aplikasi' => strtolower(url_title($aplikasi))
 			);

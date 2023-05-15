@@ -32,7 +32,7 @@
 											<td><?php echo $no++; ?></td>
 											<td><?php echo $k->nama_aplikasi; ?></td>
 											<td><?php echo $k->slug_aplikasi; ?></td>
-											<td><?php echo $k->ket_aplikasi; ?></td>
+											<td><?php echo $k->nama_kategori; ?></td>
 											<td><?php echo $k->link_aplikasi; ?></td>
 											<td>
 												<a href="<?php echo base_url() . 'dashboard/aplikasi_edit/' . $k->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>

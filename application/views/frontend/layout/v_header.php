@@ -40,20 +40,21 @@
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aplikasi Layanan Publik</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="https://skck.polri.go.id" target="_blank">SKCK Online</a>
-              <a class="dropdown-item" href="https://www.digitalkorlantas.id" target="_blank">SIM Online</a>
-              <a class="dropdown-item" href="https://sp2hp.bareskrim.polri.go.id" target="_blank">SP2HP Online</a>
-              <a class="dropdown-item" href="http://lpse.kalteng.polri.go.id/eproc4" target="_blank">LPSE Online</a>
+              <?php
+              foreach ($layanan as $l) {
+              ?>
+                <a class="dropdown-item" href="<?php echo $l->link_aplikasi; ?>" target="_blank"><?php echo $l->nama_aplikasi; ?></a>
+              <?php } ?>
             </div>
           </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informasi Publik</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="https://www.polri.go.id/" target="_blank">Polri PRESISI</a>
-              <a class="dropdown-item" href="https://www.polri.go.id/polisiku" target="_blank">Layanan Polisi</a>
-              <a class="dropdown-item" href="https://korlantas.polri.go.id/category/sim-stnk-keliling/" target="_blank">SIM & STNK</a>
-              <a class="dropdown-item" href="https://skck.polri.go.id/" target="_blank">SKCK</a>
-              <a class="dropdown-item" href="https://sp2hp.bareskrim.polri.go.id/Home/Informasi" target="_blank">Info SP2HP</a>
+              <?php
+              foreach ($informasi as $i) {
+              ?>
+                <a class="dropdown-item" href="<?php echo $i->link_aplikasi; ?>" target="_blank"><?php echo $i->nama_aplikasi; ?></a>
+              <?php } ?>
             </div>
           </li>
           <li class="nav-item">

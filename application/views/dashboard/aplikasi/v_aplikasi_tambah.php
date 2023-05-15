@@ -32,6 +32,7 @@
 								<div class="form-group">
 									<label>Link Aplikasi</label>
 									<input type="text" name="link" class="form-control" placeholder="Masukkan link aplikasi ..">
+									<?php echo form_error('link'); ?>
 								</div>
 								<div class="form-group">
 									<label>Sub</label>
@@ -44,7 +45,7 @@
 										<?php } ?>
 									</select>
 									<br />
-									<?php echo form_error('sub'); ?>
+									<?php echo form_error('kategori'); ?>
 								</div>
 							</div>
 

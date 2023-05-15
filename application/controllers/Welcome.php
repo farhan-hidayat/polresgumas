@@ -20,6 +20,8 @@ class Welcome extends CI_Controller
 
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
 
 		// SEO META
 		$data['meta_keyword'] = $data['pengaturan']->nama;
