@@ -61,7 +61,7 @@
             <a href="#" class="nav-link">Berita</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Pengaduan</a>
+            <a href="<?php echo base_url() . 'welcome/pengaduan' ?>" class="nav-link">Pengaduan</a>
           </li>
         </ul>
       </div>

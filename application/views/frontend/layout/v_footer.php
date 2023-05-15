@@ -17,6 +17,11 @@
   AOS.init();
 </script>
 <script src="<?php echo base_url(); ?>assets/script/navbar-scroll.js"></script>
+<!-- Script Page-->
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('editor');
+</script>
 </body>
 
 </html>
