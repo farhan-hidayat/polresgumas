@@ -35,7 +35,7 @@
                             <label for="pengaduan">Isi Pengaduan</label>
                             <?php echo form_error('pengaduan'); ?>
                             <br />
-                            <textarea class="form-control" id="summernote" name="pengaduan"> <?php echo set_value('konten'); ?> </textarea>
+                            <textarea class="form-control" id="summernote" name="pengaduan"> <?php echo set_value('pengaduan'); ?> </textarea>
                         </div>
                     </div>
                 </div>
