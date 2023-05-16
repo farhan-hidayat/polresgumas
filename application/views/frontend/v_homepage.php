@@ -12,13 +12,7 @@
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="<?php echo base_url(); ?>assets/images/banner.jpg" alt="Carousel Image" class="d-block w-100" />
-              </div>
-              <div class="carousel-item">
-                <img src="<?php echo base_url(); ?>assets/images/banner.jpg" alt="Carousel Image" class="d-block w-100" />
-              </div>
-              <div class="carousel-item">
-                <img src="<?php echo base_url(); ?>assets/images/banner.jpg" alt="Carousel Image" class="d-block w-100" />
+                <img src="<?php echo base_url() . '/gambar/website/' . $pengaturan->bg; ?>" alt="Carousel Image" class="d-block w-100" />
               </div>
             </div>
           </div>
