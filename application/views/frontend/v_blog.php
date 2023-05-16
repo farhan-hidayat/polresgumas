@@ -1,65 +1,162 @@
-
-<div class="intro intro-single route bg-image" style="background-image: url(img/overlay-bg.jpg)">
-  <div class="overlay-mf"></div>
-  <div class="intro-content display-table">
-    <div class="table-cell">
-      <div class="container">
-        <h2 class="intro-title mb-4">Artikel Blog</h2>
-        <ol class="breadcrumb d-flex justify-content-center">
-          <li class="breadcrumb-item">
-            <a href="<?php echo base_url(); ?>">Home</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="<?php echo base_url('blog'); ?>">Blog</a>
-          </li>
-          <li class="breadcrumb-item active">Artikel</li>
-        </ol>
+<!-- Page Content-->
+<div class="page-content page-home">
+  <section class="store-trand-categories">
+    <div class="container">
+      <div class="row">
+        <div class="col-12" data-aos="fade-up">
+          <h5>All Categories</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="100">
+          <a href="#" class="component-categories d-block">
+            <div class="categories-image">
+              <img src="/images/categories-gadgets.svg" alt="" class="w-100" />
+              <p class="categories-text">Gadgets</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="200">
+          <a href="#" class="component-categories d-block">
+            <div class="categories-image">
+              <img src="/images/categories-furniture.svg" alt="" class="w-100" />
+              <p class="categories-text">Furniture</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="300">
+          <a href="#" class="component-categories d-block">
+            <div class="categories-image">
+              <img src="/images/categories-makeup.svg" alt="" class="w-100" />
+              <p class="categories-text">Make Up</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="400">
+          <a href="#" class="component-categories d-block">
+            <div class="categories-image">
+              <img src="/images/categories-sneaker.svg" alt="" class="w-100" />
+              <p class="categories-text">Sneaker</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="500">
+          <a href="#" class="component-categories d-block">
+            <div class="categories-image">
+              <img src="/images/categories-tools.svg" alt="" class="w-100" />
+              <p class="categories-text">Tools</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="600">
+          <a href="#" class="component-categories d-block">
+            <div class="categories-image">
+              <img src="/images/categories-baby.svg" alt="" class="w-100" />
+              <p class="categories-text">Baby</p>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section class="store-new-products">
+    <div class="container">
+      <div class="row">
+        <div class="col-12" data-aos="fade-up">
+          <h5>Semua Artikel</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-apple-watch.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Apple Watch Series 4 GPS</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-orange-bogotta.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Orange Bogotta</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-sofa-ternyaman.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Sofa Ternyaman</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-bubuk-maketti.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Bubuk Maketti</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-tatakan-gelas.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Tatakan Gelas</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-mavic-kawe.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Mavic Kawe</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="700">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-black-edition-nike.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Black Edition Nike</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="800">
+          <a href="/details.html" class="component-products d-block">
+            <div class="products-thumbnail">
+              <div class="products-image" style="
+                      background-image: url('/images/products-monkey-toys.jpg');
+                    "></div>
+            </div>
+            <div class="products-text">Monkey Toys</div>
+            <div class="products-price">$1,299</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
-<!--/ Intro Skew End /-->
-
-<!--/ Section Blog-Single Star /-->
-
-<section class="blog-wrapper sect-pt4" id="blog">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-
-        <?php foreach($artikel as $a){ ?>
-
-          <div class="post-box">
-            <div class="post-thumb">
-              <?php if($a->artikel_sampul != ""){ ?>
-                <img src="<?php echo base_url(); ?>gambar/artikel/<?php echo $a->artikel_sampul ?>" alt="<?php echo $a->artikel_judul ?>" class="img-fluid">
-              <?php } ?>
-            </div>
-            <div class="post-meta">
-              <h1 class="article-title"><a href="<?php echo base_url().$a->artikel_slug ?>"><?php echo $a->artikel_judul ?></a></h1>
-              <ul>
-                <li>
-                  <span class="ion-ios-person"></span>
-                  <a href="#"><?php echo $a->pengguna_nama ?></a>
-                </li>
-                <li>
-                  <span class="ion-pricetag"></span>
-                  <a href="#"><?php echo $a->kategori_nama ?></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        <?php } ?>
-
-        <!-- membuat tombol halaman pagination -->
-        <?php echo $this->pagination->create_links(); ?>
-
-      </div>
-
-      <div class="col-md-4">
-        <?php $this->load->view('frontend/v_sidebar'); ?>
-      </div>
-    </div>
-  </div>
-</section>
-  <!--/ Section Blog-Single End /

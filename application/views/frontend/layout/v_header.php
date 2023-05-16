@@ -58,7 +58,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Berita</a>
+            <a href="<?php echo base_url() . 'welcome/blog' ?>" class="nav-link">Berita</a>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url() . 'welcome/pengaduan' ?>" class="nav-link">Pengaduan</a>
