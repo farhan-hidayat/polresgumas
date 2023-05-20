@@ -26,11 +26,11 @@ class Dashboard extends CI_Controller
 		// hitung jumlah artikel
 		$data['jumlah_artikel'] = $this->m_data->get_data('artikel')->num_rows();
 		// // hitung jumlah kategori
-		// $data['jumlah_kategori'] = $this->m_data->get_data('kategori')->num_rows();
+		$data['jumlah_kategori'] = $this->m_data->get_data('kategori')->num_rows();
 		// // hitung jumlah pengguna
-		// $data['jumlah_pengguna'] = $this->m_data->get_data('pengguna')->num_rows();
+		$data['jumlah_pengguna'] = $this->m_data->get_data('pengguna')->num_rows();
 		// // hitung jumlah halaman
-		// $data['jumlah_halaman'] = $this->m_data->get_data('halaman')->num_rows();
+		$data['jumlah_pengaduan'] = $this->m_data->get_data('pengaduan')->num_rows();
 
 
 		$this->load->view('dashboard/layout/v_header');
@@ -852,6 +852,8 @@ class Dashboard extends CI_Controller
 			$link_tw = $this->input->post('link_tw');
 			$link_ig = $this->input->post('link_ig');
 			$link_yt = $this->input->post('link_yt');
+			$visi = $this->input->post('visi');
+			$misi = $this->input->post('misi');
 
 			$where = array();
 
@@ -861,7 +863,9 @@ class Dashboard extends CI_Controller
 				'link_fb' => $link_fb,
 				'link_tw' => $link_tw,
 				'link_ig' => $link_ig,
-				'link_yt' => $link_yt
+				'link_yt' => $link_yt,
+				'visi' => $visi,
+				'misi' => $misi,
 			);
 
 			// update pengaturan
@@ -909,6 +913,28 @@ class Dashboard extends CI_Controller
 					unlink($target_file);
 
 					$this->db->query("UPDATE pengaturan SET bg='$bg'");
+				}
+			}
+
+			if (!empty($_FILES['struktur']['name'])) {
+
+				$config2['upload_path']   = './gambar/website/';
+				$config2['allowed_types'] = 'jpg|png';
+				$config2['file_name']     = 'struktur';
+
+				$this->load->library('upload', $config2);
+
+				if ($this->upload->do_upload('struktur')) {
+					// mengambil data tentang gambar logo yang diupload
+					$strukturg = $this->upload->data();
+
+					$struktur = $strukturg['file_name'];
+					$where = array();
+					$b = $this->m_data->edit_data($where, 'pengaturan')->row();
+					$target_file = './gambar/website/' . $b->struktur;
+					unlink($target_file);
+
+					$this->db->query("UPDATE pengaturan SET struktur='$struktur'");
 				}
 			}
 

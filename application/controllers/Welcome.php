@@ -14,10 +14,6 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
-		// 3 artikel terbaru
-		// $data['artikel'] = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna_id AND kategori_artikel=kategori_id ORDER BY artikel_id DESC LIMIT 3")->result();
-		// $data['gallery'] = $this->db->query("SELECT * FROM gallery,pengguna,kategori WHERE status='Publish' AND author=pengguna_id AND kategori=kategori_id ORDER BY gallery_id DESC LIMIT 3")->result();
-
 		// data pengaturan website
 		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
 		$data['jumlah_gallery'] = $this->db->query("SELECT count(id) as jml FROM gallery WHERE status_gallery = 'Publish'")->row('jml');
@@ -62,12 +58,18 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
-	public function blog()
+	public function artikel()
 	{
+		// data pengaturan website
+		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Artikel'")->row('jml');
+		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Artikel' order by id DESC")->result();
+		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id and status_artikel = 'Publish' order by tanggal_artikel desc")->result();
+
 
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
-		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id order by tanggal_gallery desc")->result();
 		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
 		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
 
@@ -75,31 +77,52 @@ class Welcome extends CI_Controller
 		$data['meta_keyword'] = $data['pengaturan']->nama;
 		$data['meta_description'] = $data['pengaturan']->deskripsi;
 
+		$this->load->view('frontend/layout/v_header', $data);
+		$this->load->view('frontend/v_artikel', $data);
+		$this->load->view('frontend/layout/v_footer', $data);
+	}
+
+	public function artikel_detail()
+	{
+		// data pengaturan website
+		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Artikel'")->row('jml');
+		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Artikel' order by id DESC")->result();
+		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id and status_artikel = 'Publish' order by tanggal_artikel desc")->result();
 
 
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna.id AND kategori_artikel=kategori.id ORDER BY artikel.id DESC ")->result();
+		// data pengaturan website
+		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
+
+		// SEO META
+		$data['meta_keyword'] = $data['pengaturan']->nama;
+		$data['meta_description'] = $data['pengaturan']->deskripsi;
 
 		$this->load->view('frontend/layout/v_header', $data);
-		$this->load->view('frontend/v_blog', $data);
+		$this->load->view('frontend/v_artikel_detail', $data);
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
 	public function gallery()
 	{
+		// data pengaturan website
+		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Galeri'")->row('jml');
+		$data['jumlah_gallery'] = $this->db->query("SELECT count(id) as jml FROM gallery WHERE status_gallery = 'Publish'")->row('jml');
+
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Galeri' order by id DESC")->result();
+		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id and status_gallery = 'Publish' order by tanggal_gallery desc")->result();
 
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
-		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id order by tanggal_gallery desc")->result();
 		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
 		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
 
 		// SEO META
 		$data['meta_keyword'] = $data['pengaturan']->nama;
 		$data['meta_description'] = $data['pengaturan']->deskripsi;
-
-
-
-		$data['gallery'] = $this->db->query("SELECT * FROM gallery,pengguna,kategori WHERE status_gallery='Publish' AND pengguna_gallery=pengguna.id AND kategori_gallery=kategori.id ORDER BY gallery.id DESC ")->result();
 
 		$this->load->view('frontend/layout/v_header', $data);
 		$this->load->view('frontend/v_gallery', $data);
@@ -248,10 +271,6 @@ class Welcome extends CI_Controller
 
 	public function pengaduan()
 	{
-		// 3 artikel terbaru
-		// $data['artikel'] = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna_id AND kategori_artikel=kategori_id ORDER BY artikel_id DESC LIMIT 3")->result();
-		// $data['gallery'] = $this->db->query("SELECT * FROM gallery,pengguna,kategori WHERE status='Publish' AND author=pengguna_id AND kategori=kategori_id ORDER BY gallery_id DESC LIMIT 3")->result();
-
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
 		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
@@ -269,6 +288,8 @@ class Welcome extends CI_Controller
 	public function pengaduan_aksi()
 	{
 		$this->form_validation->set_rules('pengaduan', 'pengaduan', 'required');
+		$this->form_validation->set_rules('email', 'email', 'required');
+		$this->form_validation->set_rules('jenis', 'jenis', 'required');
 
 		if ($this->form_validation->run() != false) {
 

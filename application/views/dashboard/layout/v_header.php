@@ -165,6 +165,12 @@
                   </li>
                 </ul>
               </li>
+              <!-- <li class="nav-item">
+                <a href="<?php echo base_url() . 'dashboard/profil' ?>" class="nav-link <?= $this->uri->segment(2) == 'artikel' ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>Profil</p>
+                </a>
+              </li> -->
             <?php
             }
             ?>

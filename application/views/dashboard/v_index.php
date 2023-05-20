@@ -28,13 +28,10 @@
 				</div>
 
 				<div class="col-lg-3 col-6">
-					<div class="small-box bg-green">
+					<div class="small-box bg-red">
 						<div class="inner">
-							<h3><?php
-								// echo $jumlah_halaman 
-								?></h3>
-
-							<p>Jumlah Halaman/Page</p>
+							<h3><?php echo $jumlah_pengaduan ?></h3>
+							<p>Jumlah Pengaduan</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-android-document"></i>
@@ -43,12 +40,9 @@
 				</div>
 
 				<div class="col-lg-3 col-6">
-					<div class="small-box bg-red">
+					<div class="small-box bg-green">
 						<div class="inner">
-							<h3><?php
-								// echo $jumlah_kategori 
-								?></h3>
-
+							<h3><?php echo $jumlah_kategori  ?></h3>
 							<p>Jumlah Kategori</p>
 						</div>
 						<div class="icon">
@@ -60,10 +54,7 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-yellow">
 						<div class="inner">
-							<h3><?php
-								// echo $jumlah_pengguna 
-								?></h3>
-
+							<h3><?php echo $jumlah_pengguna ?></h3>
 							<p>Jumlah Pengguna</p>
 						</div>
 						<div class="icon">

@@ -1,6 +1,6 @@
 <!-- Page Content-->
 <div class="page-content page-cart">
-    <form method="post" action="<?php echo base_url('welcome/pengaduan_balas') ?>" enctype="multipart/form-data">
+    <form method="post" action="<?php echo base_url('welcome/pengaduan_aksi') ?>" enctype="multipart/form-data">
         <section class="store-cart">
             <div class="container">
                 <div class="row" data-aos="fade-up" data-aos-delay="150">
@@ -22,12 +22,14 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" name="email" placeholder="Isikan email Anda" />
+                            <?php echo form_error('email'); ?>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="jenis">Jenis Pengaduan</label>
                             <input type="text" class="form-control" name="jenis" placeholder="Isikan jenis pengaduan" />
+                            <?php echo form_error('jenis'); ?>
                         </div>
                     </div>
                     <div class="col-md-12">

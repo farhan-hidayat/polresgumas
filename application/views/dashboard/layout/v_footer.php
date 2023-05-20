@@ -104,6 +104,7 @@
   $(function() {
     // Summernote
     $('#summernote').summernote()
+    $('#summernote1').summernote()
 
     // CodeMirror
     CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {

@@ -12,7 +12,7 @@
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="<?php echo base_url() . '/gambar/website/' . $pengaturan->bg; ?>" alt="Carousel Image" class="d-block w-100" />
+                <img src="<?= base_url() . '/gambar/website/' . $pengaturan->bg; ?>" alt="Carousel Image" class="d-block w-100" />
               </div>
             </div>
           </div>
@@ -41,12 +41,12 @@
               <a href="/details.html" class="component-products d-block">
                 <div class="products-thumbnail">
                   <div class="products-image" style="
-                      background-image: url('<?php echo base_url() . '/gambar/artikel/' . $a->sampul_artikel; ?>');
+                      background-image: url('<?= base_url() . '/gambar/artikel/' . $a->sampul_artikel; ?>');
                     "></div>
                 </div>
-                <div class="products-text"><?php echo $a->judul_artikel; ?></div>
-                <div class="products-user"><?php echo $a->nama; ?></div>
-                <div class="products-price"><?php echo $a->tanggal_artikel; ?></div>
+                <div class="products-text"><?= $a->judul_artikel; ?></div>
+                <div class="products-user"><?= $a->nama; ?></div>
+                <div class="products-price"><?= $a->tanggal_artikel; ?></div>
               </a>
             </div>
           <?php } ?>
@@ -75,12 +75,12 @@
               <a href="#" class="component-products d-block">
                 <div class="products-thumbnail">
                   <div class="products-image" style="
-                      background-image: url('<?php echo base_url() . '/gambar/gallery/' . $a->sampul_gallery; ?>');
+                      background-image: url('<?= base_url() . '/gambar/gallery/' . $a->sampul_gallery; ?>');
                     "></div>
                 </div>
-                <div class="products-text"><?php echo $a->judul_gallery; ?></div>
-                <div class="products-user"><?php echo $a->nama; ?></div>
-                <div class="products-price"><?php echo $a->tanggal_gallery; ?></div>
+                <div class="products-text"><?= $a->judul_gallery; ?></div>
+                <div class="products-user"><?= $a->nama; ?></div>
+                <div class="products-price"><?= $a->tanggal_gallery; ?></div>
               </a>
             </div>
           <?php } ?>
@@ -98,33 +98,33 @@
       </div>
       <div class="row">
         <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-          <a href="<?php echo $pengaturan->link_fb ?>" target="_blank" class="component-categories d-block">
+          <a href="<?= $pengaturan->link_fb ?>" target="_blank" class="component-categories d-block">
             <div class="categories-image">
-              <img src="<?php echo base_url(); ?>assets/images/fb.png" alt="" class="w-100" />
+              <img src="<?= base_url(); ?>assets/images/fb.png" alt="" class="w-100" />
               <p class="categories-text">Facebook</p>
             </div>
           </a>
         </div>
         <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-          <a href="<?php echo $pengaturan->link_tw ?>" target="_blank" class="component-categories d-block">
+          <a href="<?= $pengaturan->link_tw ?>" target="_blank" class="component-categories d-block">
             <div class="categories-image">
-              <img src="<?php echo base_url(); ?>assets/images/tw.png" alt="" class="w-100" />
+              <img src="<?= base_url(); ?>assets/images/tw.png" alt="" class="w-100" />
               <p class="categories-text">Twitter</p>
             </div>
           </a>
         </div>
         <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-          <a href="<?php echo $pengaturan->link_ig ?>" target="_blank" class="component-categories d-block">
+          <a href="<?= $pengaturan->link_ig ?>" target="_blank" class="component-categories d-block">
             <div class="categories-image">
-              <img src="<?php echo base_url(); ?>assets/images/ig.png" alt="" class="w-100" />
+              <img src="<?= base_url(); ?>assets/images/ig.png" alt="" class="w-100" />
               <p class="categories-text">Instagram</p>
             </div>
           </a>
         </div>
         <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-          <a href="<?php echo $pengaturan->link_yt ?>" target="_blank" class="component-categories d-block">
+          <a href="<?= $pengaturan->link_yt ?>" target="_blank" class="component-categories d-block">
             <div class="categories-image">
-              <img src="<?php echo base_url(); ?>assets/images/yt.png" alt="" class="w-100" />
+              <img src="<?= base_url(); ?>assets/images/yt.png" alt="" class="w-100" />
               <p class="categories-text">Youtube</p>
             </div>
           </a>

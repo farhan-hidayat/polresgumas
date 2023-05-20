@@ -7,9 +7,9 @@
           <nav>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/index.html">Home</a>
+                <a href="<?php echo base_url() ?>">Home</a>
               </li>
-              <li class="breadcrumb-item active">Detail Artikel</li>
+              <li class="breadcrumb-item active">Artikel Detail</li>
             </ol>
           </nav>
         </div>
@@ -20,12 +20,20 @@
   <section class="store-gallery" id="gallery">
     <div class="container">
       <div class="row">
-        <div class="col-lg-10" data-aos="zoom-in">
+        <div class="col-lg-8" data-aos="zoom-in">
           <transition name="slide-fade" mode="out-in">
-            <img src="<?php echo base_url() . '/gambar/gallery/polresgumas.png'; ?>" class="w-50 main-image" alt="" />
+            <img :src="photos[activePhoto].url" :key="photos[activePhoto].id" class="w-100 main-image" alt="" />
           </transition>
         </div>
-
+        <div class="col-lg-2">
+          <div class="row">
+            <div class="col-3 col-lg-12 mt-2 mt-lg-0" v-for="(photo, index) in photos" :key="photo.id" data-aos="zoom-in" data-aos-delay="100">
+              <a href="#" @click="changeActive(index)">
+                <img :src="photo.url" class="w-100 thumbnail-image" :class="{ active: index == activePhoto }" alt="" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -44,7 +52,7 @@
     <section class="store-description">
       <div class="container">
         <div class="row">
-          <div class="col-12 col-lg-8">
+          <div class="col-12 ">
             <p>
               The Nike Air Max 720 SE goes bigger than ever before with
               Nike's tallest Air unit yet for unimaginable, all-day comfort.
@@ -63,7 +71,7 @@
         </div>
       </div>
     </section>
-    <section class="store-review">
+    <!-- <section class="store-review">
       <div class="container">
         <div class="row">
           <div class="col-12 col-lg-8 mt-3 mb-3">
@@ -97,6 +105,6 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </div>

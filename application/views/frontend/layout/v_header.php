@@ -61,7 +61,7 @@
             <a href="<?php echo base_url() . 'welcome/gallery' ?>" class="nav-link">Gallery</a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url() . 'welcome/blog' ?>" class="nav-link">Artikel</a>
+            <a href="<?php echo base_url() . 'welcome/artikel' ?>" class="nav-link">Artikel</a>
           </li>
           <li class="nav-item">
             <a href="<?php echo base_url() . 'welcome/pengaduan' ?>" class="nav-link">Pengaduan</a>
