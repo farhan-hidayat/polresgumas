@@ -848,20 +848,20 @@ class Dashboard extends CI_Controller
 
 			$nama = $this->input->post('nama');
 			$deskripsi = $this->input->post('deskripsi');
-			$link_facebook = $this->input->post('link_fb');
-			$link_twitter = $this->input->post('link_tw');
-			$link_instagram = $this->input->post('link_ig');
-			$link_github = $this->input->post('link_yt');
+			$link_fb = $this->input->post('link_fb');
+			$link_tw = $this->input->post('link_tw');
+			$link_ig = $this->input->post('link_ig');
+			$link_yt = $this->input->post('link_yt');
 
 			$where = array();
 
 			$data = array(
 				'nama' => $nama,
 				'deskripsi' => $deskripsi,
-				'link_fb' => $link_facebook,
-				'link_tw' => $link_twitter,
-				'link_ig' => $link_instagram,
-				'link_yt' => $link_github
+				'link_fb' => $link_fb,
+				'link_tw' => $link_tw,
+				'link_ig' => $link_ig,
+				'link_yt' => $link_yt
 			);
 
 			// update pengaturan
@@ -900,9 +900,9 @@ class Dashboard extends CI_Controller
 
 				if ($this->upload->do_upload('bg')) {
 					// mengambil data tentang gambar logo yang diupload
-					$bg = $this->upload->data();
+					$bgg = $this->upload->data();
 
-					$bg = $bg['file_name'];
+					$bg = $bgg['file_name'];
 					$where = array();
 					$b = $this->m_data->edit_data($where, 'pengaturan')->row();
 					$target_file = './gambar/website/' . $b->bg;

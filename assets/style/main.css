@@ -9627,16 +9627,15 @@ footer p {
   color: #0c0d36;
   margin-top: 12px;
 }
+.component-products .products-user {
+  font-weight: 700;
+  font-size: 14px;
+  color: #000000;
+}
 .component-products .products-price {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 12px;
   color: #ff7158;
-}
-.component-products .products-discount {
-  font-weight: 500;
-  font-size: 16px;
-  text-decoration: line-through;
-  color: #272626;
 }
 
 .store-breadcrumbs .breadcrumb {

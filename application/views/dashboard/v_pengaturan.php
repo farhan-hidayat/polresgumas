@@ -62,26 +62,26 @@
 
 									<div class="form-group">
 										<label>Link Facebook</label>
-										<input type="text" name="link_facebook" class="form-control" placeholder="Masukkan link facebook .." value="<?php echo $p->link_fb; ?>">
-										<?php echo form_error('link_facebook'); ?>
+										<input type="text" name="link_fb" class="form-control" placeholder="Masukkan Link Facebook .." value="<?php echo $p->link_fb; ?>">
+										<?php echo form_error('link_fb'); ?>
 									</div>
 
 									<div class="form-group">
 										<label>Link Twitter</label>
-										<input type="text" name="link_twitter" class="form-control" placeholder="Masukkan link_twitter .." value="<?php echo $p->link_tw; ?>">
-										<?php echo form_error('link_twitter'); ?>
+										<input type="text" name="link_tw" class="form-control" placeholder="Masukkan Link Twiter .." value="<?php echo $p->link_tw; ?>">
+										<?php echo form_error('link_tw'); ?>
 									</div>
 
 									<div class="form-group">
 										<label>Link Instagram</label>
-										<input type="text" name="link_instagram" class="form-control" placeholder="Masukkan link_instagram .." value="<?php echo $p->link_ig; ?>">
-										<?php echo form_error('link_instagram'); ?>
+										<input type="text" name="link_ig" class="form-control" placeholder="Masukkan Link Instagram .." value="<?php echo $p->link_ig; ?>">
+										<?php echo form_error('link_ig'); ?>
 									</div>
 
 									<div class="form-group">
-										<label>Link Github</label>
-										<input type="text" name="link_github" class="form-control" placeholder="Masukkan link_github .." value="<?php echo $p->link_yt; ?>">
-										<?php echo form_error('link_github'); ?>
+										<label>Link Youtube</label>
+										<input type="text" name="link_yt" class="form-control" placeholder="Masukkan Link Youtube .." value="<?php echo $p->link_yt; ?>">
+										<?php echo form_error('link_yt'); ?>
 									</div>
 								</div>
 
