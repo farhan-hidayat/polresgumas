@@ -31,7 +31,7 @@
       <div class="row">
         <?php if ($jumlah_artikel == 0) { ?>
           <div class="col-12 text-center py-5" data-aos="fade-up" data-aos-delay="100">
-            No Categories Found
+            Tidak ada artikel ditemukan
           </div>
         <?php } else { ?>
           <?php
@@ -63,9 +63,9 @@
         </div>
       </div>
       <div class="row">
-        <?php if ($jumlah_artikel == 0) { ?>
+        <?php if ($jumlah_gallery == 0) { ?>
           <div class="col-12 text-center py-5" data-aos="fade-up" data-aos-delay="100">
-            No Categories Found
+            Tidak ada gallery ditemukan
           </div>
         <?php } else { ?>
           <?php

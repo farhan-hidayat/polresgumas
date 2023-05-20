@@ -19,8 +19,8 @@ class Welcome extends CI_Controller
 		// $data['gallery'] = $this->db->query("SELECT * FROM gallery,pengguna,kategori WHERE status='Publish' AND author=pengguna_id AND kategori=kategori_id ORDER BY gallery_id DESC LIMIT 3")->result();
 
 		// data pengaturan website
-		$data['jumlah_artikel'] = $this->m_data->get_data('artikel')->num_rows();
-		$data['jumlah_gallery'] = $this->m_data->get_data('gallery')->num_rows();
+		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+		$data['jumlah_gallery'] = $this->db->query("SELECT count(id) as jml FROM gallery WHERE status_gallery = 'Publish'")->row('jml');
 
 		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id and status_artikel = 'Publish' order by tanggal_artikel desc limit 8")->result();
 		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id and status_gallery = 'Publish' order by tanggal_gallery desc limit 8")->result();
