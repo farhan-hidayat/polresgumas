@@ -10,6 +10,9 @@ $route['login'] = 'login';
 // route dashboard
 $route['dashboard'] = 'dashboard';
 
+// route profil
+$route['profil'] = 'welcome/profil';
+
 // // route untuk halaman artikel
 $route['artikel'] = 'welcome/artikel';
 $route['artikel/(:any)'] = 'welcome/artikel_detail/$1';

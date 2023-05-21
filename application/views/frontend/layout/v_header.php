@@ -26,17 +26,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item <?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
             <a href="<?php echo base_url(); ?>" class="nav-link">Home</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item <?= $this->uri->segment(1) == 'profil' ? 'active' : '' ?>">
+            <a href="<?php echo base_url() . 'profil' ?>" class="nav-link">Profil</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Visi & Misi</a>
               <a class="dropdown-item" href="#">Tugas & Fungsi</a>
               <a class="dropdown-item" href="#">Struktur Organisasi</a>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aplikasi Layanan Publik</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,13 +60,13 @@
               <?php } ?>
             </div>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <?= $this->uri->segment(1) == 'gallery' ? 'active' : '' ?>">
             <a href="<?php echo base_url() . 'gallery' ?>" class="nav-link">Gallery</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <?= $this->uri->segment(1) == 'artikel' ? 'active' : '' ?>">
             <a href="<?php echo base_url() . 'artikel' ?>" class="nav-link">Artikel</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <?= $this->uri->segment(1) == 'pengaduan' ? 'active' : '' ?>">
             <a href="<?php echo base_url() . 'pengaduan' ?>" class="nav-link">Pengaduan</a>
           </li>
         </ul>

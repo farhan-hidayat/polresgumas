@@ -34,6 +34,25 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
+	public function profil()
+	{
+		// data pengaturan website
+		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+		$data['jumlah_gallery'] = $this->db->query("SELECT count(id) as jml FROM gallery WHERE status_gallery = 'Publish'")->row('jml');
+
+		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
+
+		// SEO META
+		$data['meta_keyword'] = $data['pengaturan']->nama;
+		$data['meta_description'] = $data['pengaturan']->deskripsi;
+
+		$this->load->view('frontend/layout/v_header', $data);
+		$this->load->view('frontend/v_profil', $data);
+		$this->load->view('frontend/layout/v_footer', $data);
+	}
+
 	public function single($slug)
 	{
 		$data['artikel'] = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna.id AND kategori_artikel=kategori.id AND slug_artikel='$slug'")->result();
