@@ -58,13 +58,13 @@
             </div>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url() . 'welcome/gallery' ?>" class="nav-link">Gallery</a>
+            <a href="<?php echo base_url() . 'gallery' ?>" class="nav-link">Gallery</a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url() . 'welcome/artikel' ?>" class="nav-link">Artikel</a>
+            <a href="<?php echo base_url() . 'artikel' ?>" class="nav-link">Artikel</a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url() . 'welcome/pengaduan' ?>" class="nav-link">Pengaduan</a>
+            <a href="<?php echo base_url() . 'pengaduan' ?>" class="nav-link">Pengaduan</a>
           </li>
         </ul>
       </div>

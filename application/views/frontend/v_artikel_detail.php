@@ -9,7 +9,7 @@
               <li class="breadcrumb-item">
                 <a href="<?php echo base_url() ?>">Home</a>
               </li>
-              <li class="breadcrumb-item active">Artikel Detail</li>
+              <li class="breadcrumb-item active">Detail Artikel</li>
             </ol>
           </nav>
         </div>
@@ -20,19 +20,10 @@
   <section class="store-gallery" id="gallery">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8" data-aos="zoom-in">
+        <div class="col-lg-12" data-aos="zoom-in">
           <transition name="slide-fade" mode="out-in">
-            <img :src="photos[activePhoto].url" :key="photos[activePhoto].id" class="w-100 main-image" alt="" />
+            <img src="<?= base_url() . '/gambar/artikel/' . $artikel->sampul_artikel; ?>" class="w-100 main-image" alt="" />
           </transition>
-        </div>
-        <div class="col-lg-2">
-          <div class="row">
-            <div class="col-3 col-lg-12 mt-2 mt-lg-0" v-for="(photo, index) in photos" :key="photo.id" data-aos="zoom-in" data-aos-delay="100">
-              <a href="#" @click="changeActive(index)">
-                <img :src="photo.url" class="w-100 thumbnail-image" :class="{ active: index == activePhoto }" alt="" />
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -43,9 +34,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
-            <h1>Sofa Ternyaman</h1>
-            <div class="owner">By Farhan</div>
-            <div class="price">$1,410</div>
+            <h1><?= $artikel->judul_artikel; ?></h1>
+            <div class="owner">By <?= $artikel->nama; ?></div>
+            <div class="price"><?= $artikel->tanggal_artikel; ?></div>
           </div>
         </div>
     </section>
@@ -53,20 +44,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 ">
-            <p>
-              The Nike Air Max 720 SE goes bigger than ever before with
-              Nike's tallest Air unit yet for unimaginable, all-day comfort.
-              There's super breathable fabrics on the upper, while colours
-              add a modern edge.
-            </p>
-            <p>
-              Bring the past into the future with the Nike Air Max 2090, a
-              bold look inspired by the DNA of the iconic Air Max 90.
-              Brand-new Nike Air cushioning underfoot adds unparalleled
-              comfort while transparent mesh and vibrantly coloured details
-              on the upper are blended with timeless OG features for an
-              edgy, modernised look.
-            </p>
+            <?= $artikel->konten_artikel; ?>
           </div>
         </div>
       </div>

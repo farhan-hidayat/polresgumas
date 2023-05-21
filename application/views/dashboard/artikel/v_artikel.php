@@ -47,7 +47,7 @@
 												<?php echo $a->judul_artikel; ?>
 												<br />
 												<small class="text-muted">
-													<?php echo base_url() . "" . $a->slug_artikel; ?>
+													<?php echo base_url() . 'artikel/' . $a->slug_artikel; ?>
 												</small>
 											</td>
 											<td><?php echo $a->nama; ?></td>
@@ -64,7 +64,7 @@
 
 											</td>
 											<td>
-												<a target="_blank" href="<?php echo base_url() . $a->slug_artikel; ?>" class="btn btn-success btn-sm"> <i class="fa fa-eye"></i> </a>
+												<a target="_blank" href="<?php echo base_url() . 'artikel/' . $a->slug_artikel; ?>" class="btn btn-success btn-sm"> <i class="fa fa-eye"></i> </a>
 												<?php
 												// cek apakah penggun yang login adalah penulis
 												if ($this->session->userdata('level') == "penulis") {

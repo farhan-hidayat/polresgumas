@@ -17,7 +17,7 @@
           foreach ($kategori as $a) {
           ?>
             <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="100">
-              <a href="#" class="component-categories d-block">
+              <a href="<?php echo base_url() . 'artikel/kategori/' . $a->slug_kategori; ?>" class="component-categories d-block">
                 <div class="categories-image">
                   <!-- <img src="/images/categories-gadgets.svg" alt="" class="w-100" /> -->
                   <p class="categories-text"><?= $a->nama_kategori; ?></p>
@@ -47,7 +47,7 @@
           foreach ($artikel as $a) {
           ?>
             <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <a href="<?php echo base_url() . 'welcome/artikel_detail/' ?>" class="component-products d-block">
+              <a href="<?php echo base_url() . 'artikel/' . $a->slug_artikel; ?>" class="component-products d-block">
                 <div class="products-thumbnail">
                   <div class="products-image" style="
                       background-image: url('<?= base_url() . '/gambar/artikel/' . $a->sampul_artikel; ?>');

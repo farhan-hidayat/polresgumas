@@ -38,7 +38,7 @@
           foreach ($artikel as $a) {
           ?>
             <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <a href="/details.html" class="component-products d-block">
+              <a href="<?php echo base_url() . 'artikel/' . $a->slug_artikel; ?>" class="component-products d-block">
                 <div class="products-thumbnail">
                   <div class="products-image" style="
                       background-image: url('<?= base_url() . '/gambar/artikel/' . $a->sampul_artikel; ?>');

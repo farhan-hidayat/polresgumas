@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
 $route['default_controller'] = 'welcome';
@@ -10,18 +10,20 @@ $route['login'] = 'login';
 // route dashboard
 $route['dashboard'] = 'dashboard';
 
-// // route untuk halaman blog
-$route['blog'] = 'welcome/blog';
-$route['blog/(:num)'] = 'welcome/blog/$1';
+// // route untuk halaman artikel
+$route['artikel'] = 'welcome/artikel';
+$route['artikel/(:any)'] = 'welcome/artikel_detail/$1';
 
+// route untuk halaman kategori artikel
+$route['artikel/kategori/(:any)'] = 'welcome/kat_artikel/$1';
+$route['kategori/(:any)/(:num)'] = 'welcome/kategori/$1/$s2';
+
+// route untuk halaman gallery
 $route['gallery'] = 'welcome/gallery';
 $route['gallery/(:num)'] = 'welcome/gallery/$1';
 
-$route['tutorial'] = 'welcome/tutorial';
-
-// route untuk halaman kategori artikel
-$route['kategori/(:any)'] = 'welcome/kategori/$1';
-$route['kategori/(:any)/(:num)'] = 'welcome/kategori/$1/$s2';
+// route untuk halaman pengaduan
+$route['pengaduan'] = 'welcome/pengaduan';
 
 // route untuk halaman cari artikel
 $route['search'] = 'welcome/search';
