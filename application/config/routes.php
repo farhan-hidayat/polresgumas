@@ -20,7 +20,7 @@ $route['kategori/(:any)/(:num)'] = 'welcome/kategori/$1/$s2';
 
 // route untuk halaman gallery
 $route['gallery'] = 'welcome/gallery';
-$route['gallery/(:num)'] = 'welcome/gallery/$1';
+$route['gallery/(:any)'] = 'welcome/kat_gallery/$1';
 
 // route untuk halaman pengaduan
 $route['pengaduan'] = 'welcome/pengaduan';

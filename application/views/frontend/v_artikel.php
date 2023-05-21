@@ -18,10 +18,7 @@
           ?>
             <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="100">
               <a href="<?php echo base_url() . 'artikel/kategori/' . $a->slug_kategori; ?>" class="component-categories d-block">
-                <div class="categories-image">
-                  <!-- <img src="/images/categories-gadgets.svg" alt="" class="w-100" /> -->
-                  <p class="categories-text"><?= $a->nama_kategori; ?></p>
-                </div>
+                <p class="categories-text"><?= $a->nama_kategori; ?></p>
               </a>
             </div>
           <?php } ?>

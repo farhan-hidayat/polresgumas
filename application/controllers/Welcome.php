@@ -153,6 +153,29 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
+	public function kat_gallery($slug)
+	{
+		// data pengaturan website
+		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Galeri'")->row('jml');
+		$data['jumlah_gallery'] = $this->db->query("SELECT count(gallery.id) as jml, slug_kategori FROM gallery,kategori WHERE kategori_gallery=kategori.id and status_gallery = 'Publish' and slug_kategori='$slug'")->row('jml');
+
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Galeri' order by id DESC")->result();
+		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id and status_gallery = 'Publish' and slug_kategori='$slug' order by tanggal_gallery desc")->result();
+
+		// data pengaturan website
+		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
+
+		// SEO META
+		$data['meta_keyword'] = $data['pengaturan']->nama;
+		$data['meta_description'] = $data['pengaturan']->deskripsi;
+
+		$this->load->view('frontend/layout/v_header', $data);
+		$this->load->view('frontend/v_gallery', $data);
+		$this->load->view('frontend/layout/v_footer', $data);
+	}
+
 	public function page($slug)
 	{
 		$where = array(
