@@ -125,8 +125,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="<?php echo base_url() . 'dashboard' ?>" class="nav-link <?= $this->uri->segment(2) == '' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -136,8 +134,8 @@
             <?php
             if ($this->session->userdata('level') == "admin") {
             ?>
-              <li class="nav-item <?= $this->uri->segment(2) == 'kategori' || $this->uri->segment(2) == 'aplikasi' || $this->uri->segment(2) == 'pengguna' ? 'menu-open' : '' ?>">
-                <a href="#" class="nav-link <?= $this->uri->segment(2) == 'kategori' || $this->uri->segment(2) == 'aplikasi' || $this->uri->segment(2) == 'pengguna' ? 'active' : '' ?>">
+              <li class="nav-item <?= $this->uri->segment(2) == 'kategori' || $this->uri->segment(2) == 'polsek' || $this->uri->segment(2) == 'satker' || $this->uri->segment(2) == 'aplikasi' || $this->uri->segment(2) == 'pengguna' ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= $this->uri->segment(2) == 'kategori' || $this->uri->segment(2) == 'polsek' || $this->uri->segment(2) == 'satker' || $this->uri->segment(2) == 'aplikasi' || $this->uri->segment(2) == 'pengguna' ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-folder"></i>
                   <p>
                     Master Data
@@ -149,6 +147,18 @@
                     <a href="<?php echo base_url() . 'dashboard/kategori' ?>" class="nav-link <?= $this->uri->segment(2) == 'kategori' ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
                       <p>KATEGORI</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url() . 'dashboard/polsek' ?>" class="nav-link <?= $this->uri->segment(2) == 'polsek' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>POLSEK</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url() . 'dashboard/satker' ?>" class="nav-link <?= $this->uri->segment(2) == 'satker' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>SATKER</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -165,12 +175,6 @@
                   </li>
                 </ul>
               </li>
-              <!-- <li class="nav-item">
-                <a href="<?php echo base_url() . 'dashboard/profil' ?>" class="nav-link <?= $this->uri->segment(2) == 'berita' ? 'active' : '' ?>">
-                  <i class="nav-icon fas fa-user"></i>
-                  <p>Profil</p>
-                </a>
-              </li> -->
             <?php
             }
             ?>
@@ -210,12 +214,6 @@
             <?php
             }
             ?>
-            <!-- <li class="nav-item">
-              <a href="<?php echo base_url() . 'dashboard/profil' ?>" class="nav-link <?= $this->uri->segment(2) == 'profil' ? 'active' : '' ?>">
-                <i class="nav-icon far fa-user"></i>
-                <p>PROFIL</p>
-              </a>
-            </li> -->
             <li class="nav-item">
               <a href="<?php echo base_url() . 'dashboard/ganti_password' ?>" class="nav-link <?= $this->uri->segment(2) == 'ganti_password' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-lock"></i>

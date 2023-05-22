@@ -15,7 +15,9 @@
                 </center>
             </div>
             <div class="row" data-aos="fade-up">
-                <?= $pengaturan->visi  ?>
+                <div class="col-12">
+                    <?= $pengaturan->visi  ?>
+                </div>
             </div>
         </div>
         <hr>
@@ -24,13 +26,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-12" data-aos="fade-up">
+                    <br>
                     <center>
                         <h2><b>Tugas & Fungsi Polres Gunung Mas</b></h2>
                     </center>
+                    <br>
                 </div>
             </div>
             <div class="row" data-aos="fade-up">
-                <?= $pengaturan->tugas  ?>
+                <div class="col-12">
+                    <?= $pengaturan->tugas  ?>
+                </div>
             </div>
         </div>
     </section>

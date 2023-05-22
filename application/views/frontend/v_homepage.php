@@ -92,7 +92,7 @@
   <section class="store-trand-categories">
     <div class="container">
       <div class="row">
-        <div class="col-12" data-aos="fade-up">
+        <div class="col-12 text-center" data-aos="fade-up">
           <h5>Sosial Media</h5>
         </div>
       </div>

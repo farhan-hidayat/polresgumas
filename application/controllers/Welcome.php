@@ -53,30 +53,6 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
-	public function single($slug)
-	{
-		$data['berita'] = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna.id AND kategori_berita=kategori.id AND slug_berita='$slug'")->result();
-
-		// data pengaturan website
-		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
-		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id order by tanggal_gallery desc")->result();
-		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
-		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
-
-		// SEO META
-		if (count($data['berita']) > 0) {
-			$data['meta_keyword'] = $data['berita'][0]->berita_judul;
-			$data['meta_description'] = substr($data['berita'][0]->berita_konten, 0, 100);
-		} else {
-			$data['meta_keyword'] = $data['pengaturan']->nama;
-			$data['meta_description'] = $data['pengaturan']->deskripsi;
-		}
-
-		$this->load->view('frontend/layout/v_header', $data);
-		$this->load->view('frontend/v_single', $data);
-		$this->load->view('frontend/layout/v_footer', $data);
-	}
-
 	public function berita()
 	{
 		// data pengaturan website
@@ -195,26 +171,6 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
-	public function page($slug)
-	{
-		$where = array(
-			'halaman_slug' => $slug
-		);
-
-		$data['halaman'] = $this->m_data->edit_data($where, 'halaman')->result();
-
-		// data pengaturan website
-		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
-
-		// SEO META
-		$data['meta_keyword'] = $data['pengaturan']->nama;
-		$data['meta_description'] = $data['pengaturan']->deskripsi;
-
-		$this->load->view('frontend/layout/v_header', $data);
-		$this->load->view('frontend/v_page', $data);
-		$this->load->view('frontend/layout/v_footer', $data);
-	}
-
 	public function kategori($slug)
 	{
 
@@ -265,58 +221,85 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
-	public function search()
+	public function polsek()
 	{
-		//mengambil nilai keyword dari form pencarian
-		$cari = htmlentities((trim($this->input->post('cari', true))) ? trim($this->input->post('cari', true)) : '');
+		// data pengaturan website
+		$data['jumlah_polsek'] = $this->db->query("SELECT count(id) as jml FROM polsek")->row('jml');
 
-		//jika uri segmen 2 ada, maka nilai variabel $search akan diganti dengan nilai uri segmen 2
-		$cari = ($this->uri->segment(2)) ? $this->uri->segment(2) : $cari;
+		$data['polsek'] = $this->db->query("SELECT * FROM polsek order by id desc")->result();
 
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
 
 		// SEO META
 		$data['meta_keyword'] = $data['pengaturan']->nama;
 		$data['meta_description'] = $data['pengaturan']->deskripsi;
 
-		$jumlah_berita = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna.id AND kategori_berita=kategori.id AND (berita_judul LIKE '%$cari%' OR berita_konten LIKE '%$cari%')")->num_rows();
-
-		$this->load->library('pagination');
-		$config['base_url'] = base_url() . 'search/' . $cari;
-		$config['total_rows'] = $jumlah_berita;
-		$config['per_page'] = 2;
-
-		$config['first_link']       = 'First';
-		$config['last_link']        = 'Last';
-		$config['next_link']        = 'Next';
-		$config['prev_link']        = 'Prev';
-		$config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-		$config['full_tag_close']   = '</ul></nav></div>';
-		$config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-		$config['num_tag_close']    = '</span></li>';
-		$config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
-		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-		$config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-		$config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-		$config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-		$config['prev_tagl_close']  = '</span>Next</li>';
-		$config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-		$config['first_tagl_close'] = '</span></li>';
-		$config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-		$config['last_tagl_close']  = '</span></li>';
-
-
-		$from = $this->uri->segment(3);
-		if ($from == "") {
-			$from = 0;
-		}
-		$this->pagination->initialize($config);
-
-		$data['berita'] = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna_id AND kategori_berita=kategori_id AND (berita_judul LIKE '%$cari%' OR berita_konten LIKE '%$cari%') ORDER BY berita_id DESC LIMIT $config[per_page] OFFSET $from")->result();
-		$data['cari'] = $cari;
 		$this->load->view('frontend/layout/v_header', $data);
-		$this->load->view('frontend/v_search', $data);
+		$this->load->view('frontend/v_polsek', $data);
+		$this->load->view('frontend/layout/v_footer', $data);
+	}
+
+	public function polsek_detail($slug)
+	{
+		// data pengaturan website
+
+		$data['polsek'] = $this->db->query("SELECT * FROM polsek WHERE slug_polsek='$slug'")->row();
+
+		// data pengaturan website
+		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
+
+		// SEO META
+		$data['meta_keyword'] = $data['pengaturan']->nama;
+		$data['meta_description'] = $data['pengaturan']->deskripsi;
+
+		$this->load->view('frontend/layout/v_header', $data);
+		$this->load->view('frontend/v_polsek_detail', $data);
+		$this->load->view('frontend/layout/v_footer', $data);
+	}
+
+	public function satker()
+	{
+		// data pengaturan website
+		$data['jumlah_satker'] = $this->db->query("SELECT count(id) as jml FROM satker")->row('jml');
+
+		$data['satker'] = $this->db->query("SELECT * FROM satker order by id desc")->result();
+
+		// data pengaturan website
+		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
+
+		// SEO META
+		$data['meta_keyword'] = $data['pengaturan']->nama;
+		$data['meta_description'] = $data['pengaturan']->deskripsi;
+
+		$this->load->view('frontend/layout/v_header', $data);
+		$this->load->view('frontend/v_satker', $data);
+		$this->load->view('frontend/layout/v_footer', $data);
+	}
+	public function satker_detail($slug)
+	{
+		// data pengaturan website
+		$data['jumlah_satker'] = $this->db->query("SELECT count(id) as jml FROM satker")->row('jml');
+
+		$data['satker'] = $this->db->query("SELECT * FROM satker where slug_satker='$slug'")->row();
+
+		// data pengaturan website
+		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
+		$data['layanan'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=1 ORDER BY id DESC")->result();
+		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
+
+		// SEO META
+		$data['meta_keyword'] = $data['pengaturan']->nama;
+		$data['meta_description'] = $data['pengaturan']->deskripsi;
+
+		$this->load->view('frontend/layout/v_header', $data);
+		$this->load->view('frontend/v_satker_detail', $data);
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 

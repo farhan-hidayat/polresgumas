@@ -32,6 +32,13 @@
           <li class="nav-item <?= $this->uri->segment(1) == 'profil' ? 'active' : '' ?>">
             <a href="<?php echo base_url() . 'profil' ?>" class="nav-link">Profil</a>
           </li>
+          <li class="nav-item dropdown <?= $this->uri->segment(1) == 'polsek' || $this->uri->segment(1) == 'satker' ? 'active' : '' ?>">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Satuan</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="<?php echo base_url() . 'polsek' ?>">POLSEK</a>
+              <a class="dropdown-item" href="<?php echo base_url() . 'satker' ?>">SATKER</a>
+            </div>
+          </li>
           <!-- <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">

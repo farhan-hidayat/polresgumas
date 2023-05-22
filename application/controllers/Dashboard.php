@@ -474,7 +474,6 @@ class Dashboard extends CI_Controller
 		}
 	}
 
-
 	public function berita_edit($id)
 	{
 		$where = array(
@@ -486,7 +485,6 @@ class Dashboard extends CI_Controller
 		$this->load->view('dashboard/berita/v_berita_edit', $data);
 		$this->load->view('dashboard/layout/v_footer');
 	}
-
 
 	public function berita_update()
 	{
@@ -536,7 +534,7 @@ class Dashboard extends CI_Controller
 					);
 
 					$a = $this->m_data->edit_data($where, 'berita')->row();
-					$target_file = './gambar/berita/' . $a->berita_sampul;
+					$target_file = './gambar/berita/' . $a->sampul_berita;
 					unlink($target_file);
 
 					$this->m_data->update_data($where, $data, 'berita');
@@ -577,7 +575,7 @@ class Dashboard extends CI_Controller
 		);
 
 		$a = $this->m_data->edit_data($where, 'berita')->row();
-		$target_file = './gambar/berita/' . $a->berita_sampul;
+		$target_file = './gambar/berita/' . $a->sampul_berita;
 		unlink($target_file);
 
 		$this->m_data->delete_data($where, 'berita');
@@ -585,6 +583,368 @@ class Dashboard extends CI_Controller
 		redirect(base_url() . 'dashboard/berita/berita');
 	}
 	// end crud berita
+
+	// CRUD polsek
+	public function polsek()
+	{
+		$data['polsek'] = $this->db->query("SELECT * FROM polsek order by id desc")->result();
+		$this->load->view('dashboard/layout/v_header');
+		$this->load->view('dashboard/polsek/v_polsek', $data);
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+	public function polsek_tambah()
+	{
+		$this->load->view('dashboard/layout/v_header');
+		$this->load->view('dashboard/polsek/v_polsek_tambah');
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+	public function polsek_aksi()
+	{
+		// Wajib isi judul,konten dan kategori
+		$this->form_validation->set_rules('nama', 'nama', 'required|is_unique[polsek.nama_polsek]');
+		$this->form_validation->set_rules('alamat', 'alamat', 'required');
+
+		// Membuat gambar wajib di isi
+		if (empty($_FILES['sampul']['name'])) {
+			$this->form_validation->set_rules('sampul', 'Gambar Sampul', 'required');
+		}
+
+		if ($this->form_validation->run() != false) {
+
+			$config['upload_path']   = './gambar/polsek/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('sampul')) {
+
+				// mengambil data tentang gambar
+				$gambar = $this->upload->data();
+
+				$nama = $this->input->post('nama');
+				$slug = strtolower(url_title($nama));
+				$sampul = $gambar['file_name'];
+				$alamat = $this->input->post('alamat');
+				$map = $this->input->post('map');
+
+				$data = array(
+					'nama_polsek' => $nama,
+					'slug_polsek' => $slug,
+					'sampul_polsek' => $sampul,
+					'alamat_polsek' => $alamat,
+					'map_polsek' => $map,
+				);
+
+				$this->m_data->insert_data($data, 'polsek');
+
+				redirect(base_url() . 'dashboard/polsek/polsek');
+			} else {
+
+				$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
+
+				$this->load->view('dashboard/layout/v_header');
+				$this->load->view('dashboard/polsek/v_polsek_tambah', $data);
+				$this->load->view('dashboard/layout/v_footer');
+			}
+		} else {
+			$this->load->view('dashboard/layout/v_header');
+			$this->load->view('dashboard/polsek/v_polsek_tambah');
+			$this->load->view('dashboard/layout/v_footer');
+		}
+	}
+
+	public function polsek_edit($id)
+	{
+		$where = array(
+			'id' => $id
+		);
+		$data['polsek'] = $this->m_data->edit_data($where, 'polsek')->result();
+		$this->load->view('dashboard/layout/v_header');
+		$this->load->view('dashboard/polsek/v_polsek_edit', $data);
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+	public function polsek_update()
+	{
+		// Wajib isi judul,konten dan kategori
+		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('alamat', 'alamat', 'required');
+
+		if ($this->form_validation->run() != false) {
+
+			$id = $this->input->post('id');
+
+			$nama = $this->input->post('nama');
+			$slug = strtolower(url_title($nama));
+			$alamat = $this->input->post('alamat');
+			$map = $this->input->post('map');
+
+			$where = array(
+				'id' => $id
+			);
+
+			$data = array(
+				'nama_polsek' => $nama,
+				'slug_polsek' => $slug,
+				'alamat_polsek' => $alamat,
+				'map_polsek' => $map,
+			);
+
+			$this->m_data->update_data($where, $data, 'polsek');
+
+
+			if (!empty($_FILES['sampul']['name'])) {
+				$config['upload_path']   = './gambar/polsek/';
+				$config['allowed_types'] = 'gif|jpg|png|jpeg';
+
+				$this->load->library('upload', $config);
+
+				if ($this->upload->do_upload('sampul')) {
+
+					// mengambil data tentang gambar
+					$gambar = $this->upload->data();
+
+					$data = array(
+						'sampul_polsek' => $gambar['file_name'],
+					);
+
+					$a = $this->m_data->edit_data($where, 'polsek')->row();
+					$target_file = './gambar/polsek/' . $a->polsek_sampul;
+					unlink($target_file);
+
+					$this->m_data->update_data($where, $data, 'polsek');
+
+					redirect(base_url() . 'dashboard/polsek');
+				} else {
+					$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
+
+					$where = array(
+						'id' => $id
+					);
+					$data['polsek'] = $this->m_data->edit_data($where, 'polsek')->result();
+					$this->load->view('dashboard/layout/v_header');
+					$this->load->view('dashboard/polsek/v_polsek_edit', $data);
+					$this->load->view('dashboard/layout/v_footer');
+				}
+			} else {
+				redirect(base_url() . 'dashboard/polsek/polsek');
+			}
+		} else {
+			$id = $this->input->post('id');
+			$where = array(
+				'id' => $id
+			);
+			$data['polsek'] = $this->m_data->edit_data($where, 'polsek')->result();
+			$this->load->view('dashboard/layout/v_header');
+			$this->load->view('dashboard/polsek/v_polsek_edit', $data);
+			$this->load->view('dashboard/layout/v_footer');
+		}
+	}
+
+	public function polsek_hapus($id)
+	{
+		$where = array(
+			'id' => $id
+		);
+
+		$a = $this->m_data->edit_data($where, 'polsek')->row();
+		$target_file = './gambar/polsek/' . $a->sampul_polsek;
+		unlink($target_file);
+
+		$this->m_data->delete_data($where, 'polsek');
+
+		redirect(base_url() . 'dashboard/polsek/polsek');
+	}
+	// end crud polsek
+
+	// CRUD satker
+	public function satker()
+	{
+		$data['satker'] = $this->db->query("SELECT * FROM satker order by id desc")->result();
+		$this->load->view('dashboard/layout/v_header');
+		$this->load->view('dashboard/satker/v_satker', $data);
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+	public function satker_tambah()
+	{
+		$this->load->view('dashboard/layout/v_header');
+		$this->load->view('dashboard/satker/v_satker_tambah');
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+	public function satker_aksi()
+	{
+		// Wajib isi judul,konten dan kategori
+		$this->form_validation->set_rules('nama', 'nama', 'required|is_unique[satker.nama_satker]');
+		$this->form_validation->set_rules('ket', 'ket', 'required');
+
+
+		if ($this->form_validation->run() != false) {
+
+			$count = count($_FILES['files']['name']);
+
+			for ($i = 0; $i < $count; $i++) {
+				if (!empty($_FILES['files']['name'][$i])) {
+					$_FILES['file']['name'] = $_FILES['files']['name'][$i];
+					$_FILES['file']['type'] = $_FILES['files']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+					$_FILES['file']['error'] = $_FILES['files']['error'][$i];
+					$_FILES['file']['size'] = $_FILES['files']['size'][$i];
+
+					$config['upload_path']   = './gambar/satker/';
+					$config['allowed_types'] = 'gif|jpg|png|jpeg';
+					$config['file_name'] = $_FILES['files']['name'][$i];
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+
+					if ($this->upload->do_upload('file')) {
+
+						// mengambil data tentang gambar
+						$gambar = $this->upload->data();
+
+						$nama = $this->input->post('nama');
+						$slug = strtolower(url_title($nama));
+						$sampul[$i] = $gambar['file_name'];
+						$ket = $this->input->post('ket');
+
+						$data = array(
+							'nama_satker' => $nama,
+							'slug_satker' => $slug,
+							'ket_satker' => $ket,
+						);
+
+						$this->m_data->insert_data($data, 'satker');
+						$idsatker =
+							$this->db->query("SELECT id FROM satker order by id desc limit 1")->row('id');
+						$data1 = array(
+							'satker' => $idsatker,
+							'foto_satker' => $sampul,
+						);
+						$this->db->insert('satker', $data1);
+
+						redirect(base_url() . 'dashboard/satker/satker');
+					} else {
+
+						$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
+
+						$this->load->view('dashboard/layout/v_header');
+						$this->load->view('dashboard/satker/v_satker_tambah', $data);
+						$this->load->view('dashboard/layout/v_footer');
+					}
+				}
+			}
+		} else {
+			$this->load->view('dashboard/layout/v_header');
+			$this->load->view('dashboard/satker/v_satker_tambah');
+			$this->load->view('dashboard/layout/v_footer');
+		}
+	}
+
+	public function satker_edit($id)
+	{
+		$where = array(
+			'id' => $id
+		);
+		$data['satker'] = $this->m_data->edit_data($where, 'satker')->result();
+		$this->load->view('dashboard/layout/v_header');
+		$this->load->view('dashboard/satker/v_satker_edit', $data);
+		$this->load->view('dashboard/layout/v_footer');
+	}
+
+	public function satker_update()
+	{
+		// Wajib isi judul,konten dan kategori
+		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('ket', 'ket', 'required');
+
+		if ($this->form_validation->run() != false) {
+
+			$id = $this->input->post('id');
+
+			$nama = $this->input->post('nama');
+			$slug = strtolower(url_title($nama));
+			$ket = $this->input->post('ket');
+
+			$where = array(
+				'id' => $id
+			);
+
+			$data = array(
+				'nama_satker' => $nama,
+				'slug_satker' => $slug,
+				'ket_satker' => $ket,
+			);
+
+			$this->m_data->update_data($where, $data, 'satker');
+
+
+			if (!empty($_FILES['sampul']['name'])) {
+				$config['upload_path']   = './gambar/satker/';
+				$config['allowed_types'] = 'gif|jpg|png|jpeg';
+
+				$this->load->library('upload', $config);
+
+				if ($this->upload->do_upload('sampul')) {
+
+					// mengambil data tentang gambar
+					$gambar = $this->upload->data();
+
+					$data = array(
+						'sampul_satker' => $gambar['file_name'],
+					);
+
+					$a = $this->m_data->edit_data($where, 'satker')->row();
+					$target_file = './gambar/satker/' . $a->satker_sampul;
+					unlink($target_file);
+
+					$this->m_data->update_data($where, $data, 'satker');
+
+					redirect(base_url() . 'dashboard/satker');
+				} else {
+					$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
+
+					$where = array(
+						'id' => $id
+					);
+					$data['satker'] = $this->m_data->edit_data($where, 'satker')->result();
+					$this->load->view('dashboard/layout/v_header');
+					$this->load->view('dashboard/satker/v_satker_edit', $data);
+					$this->load->view('dashboard/layout/v_footer');
+				}
+			} else {
+				redirect(base_url() . 'dashboard/satker/satker');
+			}
+		} else {
+			$id = $this->input->post('id');
+			$where = array(
+				'id' => $id
+			);
+			$data['satker'] = $this->m_data->edit_data($where, 'satker')->result();
+			$this->load->view('dashboard/layout/v_header');
+			$this->load->view('dashboard/satker/v_satker_edit', $data);
+			$this->load->view('dashboard/layout/v_footer');
+		}
+	}
+
+	public function satker_hapus($id)
+	{
+		$where = array(
+			'id' => $id
+		);
+
+		$a = $this->m_data->edit_data($where, 'satker')->row();
+		$target_file = './gambar/satker/' . $a->sampul_satker;
+		unlink($target_file);
+
+		$this->m_data->delete_data($where, 'satker');
+
+		redirect(base_url() . 'dashboard/satker/satker');
+	}
+	// end crud satker
 
 	// CRUD GALLERY
 	public function gallery()

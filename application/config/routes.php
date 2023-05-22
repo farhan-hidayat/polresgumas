@@ -13,6 +13,14 @@ $route['dashboard'] = 'dashboard';
 // route profil
 $route['profil'] = 'welcome/profil';
 
+// route polsek
+$route['polsek'] = 'welcome/polsek';
+$route['polsek/(:any)'] = 'welcome/polsek_detail/$1';
+
+// route satker
+$route['satker'] = 'welcome/satker';
+$route['satker/(:any)'] = 'welcome/satker_detail/$1';
+
 // // route untuk halaman berita
 $route['berita'] = 'welcome/berita';
 $route['berita/(:any)'] = 'welcome/berita_detail/$1';
