@@ -25,13 +25,13 @@
     <div class="container">
       <div class="row">
         <div class="col-12" data-aos="fade-up">
-          <h5>Artikel Baru</h5>
+          <h5>Berita Baru</h5>
         </div>
       </div>
       <div class="row">
         <?php if ($jumlah_artikel == 0) { ?>
           <div class="col-12 text-center py-5" data-aos="fade-up" data-aos-delay="100">
-            Tidak ada artikel ditemukan
+            Tidak ada berita ditemukan
           </div>
         <?php } else { ?>
           <?php

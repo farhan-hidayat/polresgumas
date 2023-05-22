@@ -853,7 +853,7 @@ class Dashboard extends CI_Controller
 			$link_ig = $this->input->post('link_ig');
 			$link_yt = $this->input->post('link_yt');
 			$visi = $this->input->post('visi');
-			$misi = $this->input->post('misi');
+			$tugas = $this->input->post('tugas');
 
 			$where = array();
 
@@ -865,7 +865,7 @@ class Dashboard extends CI_Controller
 				'link_ig' => $link_ig,
 				'link_yt' => $link_yt,
 				'visi' => $visi,
-				'misi' => $misi,
+				'tugas' => $tugas,
 			);
 
 			// update pengaturan

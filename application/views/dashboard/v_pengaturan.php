@@ -97,9 +97,9 @@
 										</div>
 
 										<div class="form-group">
-											<label>Misi</label>
+											<label>Tugas</label>
 											<br />
-											<textarea class="form-control" id="summernote1" name="misi"> <?php echo $p->misi; ?> </textarea>
+											<textarea class="form-control" id="summernote1" name="tugas"> <?php echo $p->tugas; ?> </textarea>
 										</div>
 
 										<hr>

@@ -25,12 +25,12 @@
             <div class="row">
                 <div class="col-12" data-aos="fade-up">
                     <center>
-                        <h2><b>Visi & Misi Polres Gunung Mas</b></h2>
+                        <h2><b>Tugas & Fungsi Polres Gunung Mas</b></h2>
                     </center>
                 </div>
             </div>
             <div class="row" data-aos="fade-up">
-                <?= $pengaturan->misi  ?>
+                <?= $pengaturan->tugas  ?>
             </div>
         </div>
     </section>

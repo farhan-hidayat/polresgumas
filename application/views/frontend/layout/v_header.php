@@ -64,7 +64,7 @@
             <a href="<?php echo base_url() . 'gallery' ?>" class="nav-link">Gallery</a>
           </li>
           <li class="nav-item <?= $this->uri->segment(1) == 'artikel' ? 'active' : '' ?>">
-            <a href="<?php echo base_url() . 'artikel' ?>" class="nav-link">Artikel</a>
+            <a href="<?php echo base_url() . 'artikel' ?>" class="nav-link">Berita</a>
           </li>
           <li class="nav-item <?= $this->uri->segment(1) == 'pengaduan' ? 'active' : '' ?>">
             <a href="<?php echo base_url() . 'pengaduan' ?>" class="nav-link">Pengaduan</a>
