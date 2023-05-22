@@ -1,8 +1,8 @@
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>
-			Artikel
-			<small>Manajemen Artikel</small>
+			Berita
+			<small>Manajemen Berita</small>
 		</h1>
 	</section>
 
@@ -10,14 +10,14 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="<?php echo base_url() . 'dashboard/artikel_tambah'; ?>" class="btn btn-sm btn-primary">Buat artikel baru</a>
+				<a href="<?php echo base_url() . 'dashboard/berita_tambah'; ?>" class="btn btn-sm btn-primary">Buat berita baru</a>
 
 				<br />
 				<br />
 
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">Artikel</h3>
+						<h3 class="card-title">Berita</h3>
 					</div>
 					<div class="card-body">
 
@@ -27,7 +27,7 @@
 									<tr>
 										<th width="1%">NO</th>
 										<th>Tanggal</th>
-										<th>Artikel</th>
+										<th>Berita</th>
 										<th>Author</th>
 										<th>Kategori</th>
 										<th width="10%">Gambar</th>
@@ -38,24 +38,24 @@
 								<tbody>
 									<?php
 									$no = 1;
-									foreach ($artikel as $a) {
+									foreach ($berita as $a) {
 									?>
 										<tr>
 											<td><?php echo $no++; ?></td>
-											<td><?php echo date('d/m/Y H:i', strtotime($a->tanggal_artikel)); ?></td>
+											<td><?php echo date('d/m/Y H:i', strtotime($a->tanggal_berita)); ?></td>
 											<td>
-												<?php echo $a->judul_artikel; ?>
+												<?php echo $a->judul_berita; ?>
 												<br />
 												<small class="text-muted">
-													<?php echo base_url() . 'artikel/' . $a->slug_artikel; ?>
+													<?php echo base_url() . 'berita/' . $a->slug_berita; ?>
 												</small>
 											</td>
 											<td><?php echo $a->nama; ?></td>
 											<td><?php echo $a->nama_kategori; ?></td>
-											<td><img width="100%" class="img-responsive" src="<?php echo base_url() . '/gambar/artikel/' . $a->sampul_artikel; ?>"></td>
+											<td><img width="100%" class="img-responsive" src="<?php echo base_url() . '/gambar/berita/' . $a->sampul_berita; ?>"></td>
 											<td>
 												<?php
-												if ($a->status_artikel == "Publish") {
+												if ($a->status_berita == "Publish") {
 													echo "<span class='label label-success'>Publish</span>";
 												} else {
 													echo "<span class='label label-danger'>Draft</span>";
@@ -64,22 +64,22 @@
 
 											</td>
 											<td>
-												<a target="_blank" href="<?php echo base_url() . 'artikel/' . $a->slug_artikel; ?>" class="btn btn-success btn-sm"> <i class="fa fa-eye"></i> </a>
+												<a target="_blank" href="<?php echo base_url() . 'berita/' . $a->slug_berita; ?>" class="btn btn-success btn-sm"> <i class="fa fa-eye"></i> </a>
 												<?php
 												// cek apakah penggun yang login adalah penulis
 												if ($this->session->userdata('level') == "penulis") {
-													// jika penulis, maka cek apakah penulis artikel ini adalah si pengguna atau bukan
-													if ($this->session->userdata('id') == $a->pengguna_artikel) {
+													// jika penulis, maka cek apakah penulis berita ini adalah si pengguna atau bukan
+													if ($this->session->userdata('id') == $a->pengguna_berita) {
 												?>
-														<a href="<?php echo base_url() . 'dashboard/artikel_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-														<a href="<?php echo base_url() . 'dashboard/artikel_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/berita_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/berita_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 													<?php
 													}
 												} else {
 													// jika yang login adalah admin
 													?>
-													<a href="<?php echo base_url() . 'dashboard/artikel_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-													<a href="<?php echo base_url() . 'dashboard/artikel_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/berita_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/berita_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 												<?php
 												}
 												?>

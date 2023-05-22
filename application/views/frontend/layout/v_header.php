@@ -63,8 +63,8 @@
           <li class="nav-item <?= $this->uri->segment(1) == 'gallery' ? 'active' : '' ?>">
             <a href="<?php echo base_url() . 'gallery' ?>" class="nav-link">Gallery</a>
           </li>
-          <li class="nav-item <?= $this->uri->segment(1) == 'artikel' ? 'active' : '' ?>">
-            <a href="<?php echo base_url() . 'artikel' ?>" class="nav-link">Berita</a>
+          <li class="nav-item <?= $this->uri->segment(1) == 'berita' ? 'active' : '' ?>">
+            <a href="<?php echo base_url() . 'berita' ?>" class="nav-link">Berita</a>
           </li>
           <li class="nav-item <?= $this->uri->segment(1) == 'pengaduan' ? 'active' : '' ?>">
             <a href="<?php echo base_url() . 'pengaduan' ?>" class="nav-link">Pengaduan</a>

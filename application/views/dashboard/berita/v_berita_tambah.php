@@ -1,19 +1,19 @@
 <div class="content-wrapper">
 	<section class="content-header">
 		<h1>
-			Artikel
-			<small>Tulis Artikel Baru</small>
+			Berita
+			<small>Tulis Berita Baru</small>
 		</h1>
 	</section>
 
 	<section class="content">
 
-		<a href="<?php echo base_url() . 'dashboard/artikel'; ?>" class="btn btn-sm btn-primary">Kembali</a>
+		<a href="<?php echo base_url() . 'dashboard/berita'; ?>" class="btn btn-sm btn-primary">Kembali</a>
 
 		<br />
 		<br />
 
-		<form method="post" action="<?php echo base_url('dashboard/artikel_aksi') ?>" enctype="multipart/form-data">
+		<form method="post" action="<?php echo base_url('dashboard/berita_aksi') ?>" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-lg-9">
 
@@ -24,7 +24,7 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label>Judul</label>
-									<input type="text" name="judul" class="form-control" placeholder="Masukkan judul artikel.." value="<?php echo set_value('judul'); ?>">
+									<input type="text" name="judul" class="form-control" placeholder="Masukkan judul berita.." value="<?php echo set_value('judul'); ?>">
 									<br />
 									<?php echo form_error('judul'); ?>
 								</div>

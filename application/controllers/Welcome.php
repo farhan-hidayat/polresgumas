@@ -15,10 +15,10 @@ class Welcome extends CI_Controller
 	public function index()
 	{
 		// data pengaturan website
-		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+		$data['jumlah_berita'] = $this->db->query("SELECT count(id) as jml FROM berita WHERE status_berita = 'Publish'")->row('jml');
 		$data['jumlah_gallery'] = $this->db->query("SELECT count(id) as jml FROM gallery WHERE status_gallery = 'Publish'")->row('jml');
 
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id and status_artikel = 'Publish' order by tanggal_artikel desc limit 8")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,kategori,pengguna WHERE kategori_berita=kategori.id and pengguna_berita=pengguna.id and status_berita = 'Publish' order by tanggal_berita desc limit 8")->result();
 		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id and status_gallery = 'Publish' order by tanggal_gallery desc limit 8")->result();
 
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
@@ -37,7 +37,7 @@ class Welcome extends CI_Controller
 	public function profil()
 	{
 		// data pengaturan website
-		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+		$data['jumlah_berita'] = $this->db->query("SELECT count(id) as jml FROM berita WHERE status_berita = 'Publish'")->row('jml');
 		$data['jumlah_gallery'] = $this->db->query("SELECT count(id) as jml FROM gallery WHERE status_gallery = 'Publish'")->row('jml');
 
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
@@ -55,7 +55,7 @@ class Welcome extends CI_Controller
 
 	public function single($slug)
 	{
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna.id AND kategori_artikel=kategori.id AND slug_artikel='$slug'")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna.id AND kategori_berita=kategori.id AND slug_berita='$slug'")->result();
 
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
@@ -64,9 +64,9 @@ class Welcome extends CI_Controller
 		$data['informasi'] = $this->db->query("SELECT * FROM aplikasi WHERE kategori_aplikasi=2 ORDER BY id DESC")->result();
 
 		// SEO META
-		if (count($data['artikel']) > 0) {
-			$data['meta_keyword'] = $data['artikel'][0]->artikel_judul;
-			$data['meta_description'] = substr($data['artikel'][0]->artikel_konten, 0, 100);
+		if (count($data['berita']) > 0) {
+			$data['meta_keyword'] = $data['berita'][0]->berita_judul;
+			$data['meta_description'] = substr($data['berita'][0]->berita_konten, 0, 100);
 		} else {
 			$data['meta_keyword'] = $data['pengaturan']->nama;
 			$data['meta_description'] = $data['pengaturan']->deskripsi;
@@ -77,14 +77,14 @@ class Welcome extends CI_Controller
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
-	public function artikel()
+	public function berita()
 	{
 		// data pengaturan website
-		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Artikel'")->row('jml');
-		$data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Berita'")->row('jml');
+		$data['jumlah_berita'] = $this->db->query("SELECT count(id) as jml FROM berita WHERE status_berita = 'Publish'")->row('jml');
 
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Artikel' order by id DESC")->result();
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id and status_artikel = 'Publish' order by tanggal_artikel desc")->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Berita' order by id DESC")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,kategori,pengguna WHERE kategori_berita=kategori.id and pengguna_berita=pengguna.id and status_berita = 'Publish' order by tanggal_berita desc")->result();
 
 
 		// data pengaturan website
@@ -97,18 +97,18 @@ class Welcome extends CI_Controller
 		$data['meta_description'] = $data['pengaturan']->deskripsi;
 
 		$this->load->view('frontend/layout/v_header', $data);
-		$this->load->view('frontend/v_artikel', $data);
+		$this->load->view('frontend/v_berita', $data);
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
-	public function kat_artikel($slug)
+	public function kat_berita($slug)
 	{
 		// data pengaturan website
-		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Artikel'")->row('jml');
-		$data['jumlah_artikel'] = $this->db->query("SELECT count(artikel.id) as jml, slug_kategori FROM artikel,kategori WHERE kategori_artikel=kategori.id and status_artikel = 'Publish' and slug_kategori='$slug'")->row('jml');
+		$data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Berita'")->row('jml');
+		$data['jumlah_berita'] = $this->db->query("SELECT count(berita.id) as jml, slug_kategori FROM berita,kategori WHERE kategori_berita=kategori.id and status_berita = 'Publish' and slug_kategori='$slug'")->row('jml');
 
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Artikel' order by id DESC")->result();
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id and status_artikel = 'Publish' and slug_kategori='$slug' order by tanggal_artikel desc")->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Berita' order by id DESC")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,kategori,pengguna WHERE kategori_berita=kategori.id and pengguna_berita=pengguna.id and status_berita = 'Publish' and slug_kategori='$slug' order by tanggal_berita desc")->result();
 
 
 		// data pengaturan website
@@ -121,18 +121,18 @@ class Welcome extends CI_Controller
 		$data['meta_description'] = $data['pengaturan']->deskripsi;
 
 		$this->load->view('frontend/layout/v_header', $data);
-		$this->load->view('frontend/v_artikel', $data);
+		$this->load->view('frontend/v_berita', $data);
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
-	public function artikel_detail($slug)
+	public function berita_detail($slug)
 	{
 		// data pengaturan website
-		// $data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Artikel'")->row('jml');
-		// $data['jumlah_artikel'] = $this->db->query("SELECT count(id) as jml FROM artikel WHERE status_artikel = 'Publish'")->row('jml');
+		// $data['jumlah_kategori'] = $this->db->query("SELECT count(id) as jml FROM kategori WHERE ket_kategori = 'Berita'")->row('jml');
+		// $data['jumlah_berita'] = $this->db->query("SELECT count(id) as jml FROM berita WHERE status_berita = 'Publish'")->row('jml');
 
-		// $data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Artikel' order by id DESC")->result();
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id and status_artikel = 'Publish' and slug_artikel='$slug'")->row();
+		// $data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori = 'Berita' order by id DESC")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,kategori,pengguna WHERE kategori_berita=kategori.id and pengguna_berita=pengguna.id and status_berita = 'Publish' and slug_berita='$slug'")->row();
 
 
 		// data pengaturan website
@@ -145,7 +145,7 @@ class Welcome extends CI_Controller
 		$data['meta_description'] = $data['pengaturan']->deskripsi;
 
 		$this->load->view('frontend/layout/v_header', $data);
-		$this->load->view('frontend/v_artikel_detail', $data);
+		$this->load->view('frontend/v_berita_detail', $data);
 		$this->load->view('frontend/layout/v_footer', $data);
 	}
 
@@ -221,11 +221,11 @@ class Welcome extends CI_Controller
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
 
-		$jumlah_artikel = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna.id AND kategori_artikel=kategori.id AND kategori_slug='$slug'")->num_rows();
+		$jumlah_berita = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna.id AND kategori_berita=kategori.id AND kategori_slug='$slug'")->num_rows();
 
 		$this->load->library('pagination');
 		$config['base_url'] = base_url() . 'kategori/' . $slug;
-		$config['total_rows'] = $jumlah_artikel;
+		$config['total_rows'] = $jumlah_berita;
 		$config['per_page'] = 2;
 
 		$config['first_link']       = 'First';
@@ -254,7 +254,7 @@ class Welcome extends CI_Controller
 		}
 		$this->pagination->initialize($config);
 
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna.id AND kategori_artikel=kategori.id AND kategori_slug='$slug' ORDER BY artikel.id DESC LIMIT $config[per_page] OFFSET $from")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna.id AND kategori_berita=kategori.id AND kategori_slug='$slug' ORDER BY berita.id DESC LIMIT $config[per_page] OFFSET $from")->result();
 
 		// SEO META
 		$data['meta_keyword'] = $data['pengaturan']->nama;
@@ -280,11 +280,11 @@ class Welcome extends CI_Controller
 		$data['meta_keyword'] = $data['pengaturan']->nama;
 		$data['meta_description'] = $data['pengaturan']->deskripsi;
 
-		$jumlah_artikel = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna.id AND kategori_artikel=kategori.id AND (artikel_judul LIKE '%$cari%' OR artikel_konten LIKE '%$cari%')")->num_rows();
+		$jumlah_berita = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna.id AND kategori_berita=kategori.id AND (berita_judul LIKE '%$cari%' OR berita_konten LIKE '%$cari%')")->num_rows();
 
 		$this->load->library('pagination');
 		$config['base_url'] = base_url() . 'search/' . $cari;
-		$config['total_rows'] = $jumlah_artikel;
+		$config['total_rows'] = $jumlah_berita;
 		$config['per_page'] = 2;
 
 		$config['first_link']       = 'First';
@@ -313,7 +313,7 @@ class Welcome extends CI_Controller
 		}
 		$this->pagination->initialize($config);
 
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,pengguna,kategori WHERE status_artikel='Publish' AND pengguna_artikel=pengguna_id AND kategori_artikel=kategori_id AND (artikel_judul LIKE '%$cari%' OR artikel_konten LIKE '%$cari%') ORDER BY artikel_id DESC LIMIT $config[per_page] OFFSET $from")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,pengguna,kategori WHERE status_berita='Publish' AND pengguna_berita=pengguna_id AND kategori_berita=kategori_id AND (berita_judul LIKE '%$cari%' OR berita_konten LIKE '%$cari%') ORDER BY berita_id DESC LIMIT $config[per_page] OFFSET $from")->result();
 		$data['cari'] = $cari;
 		$this->load->view('frontend/layout/v_header', $data);
 		$this->load->view('frontend/v_search', $data);

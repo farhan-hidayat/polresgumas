@@ -17,7 +17,7 @@
           foreach ($kategori as $a) {
           ?>
             <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="100">
-              <a href="<?php echo base_url() . 'artikel/kategori/' . $a->slug_kategori; ?>" class="component-categories d-block">
+              <a href="<?php echo base_url() . 'berita/kategori/' . $a->slug_kategori; ?>" class="component-categories d-block">
                 <p class="categories-text"><?= $a->nama_kategori; ?></p>
               </a>
             </div>
@@ -35,24 +35,24 @@
         </div>
       </div>
       <div class="row">
-        <?php if ($jumlah_artikel == 0) { ?>
+        <?php if ($jumlah_berita == 0) { ?>
           <div class="col-12 text-center py-5" data-aos="fade-up" data-aos-delay="100">
             Tidak ada berita ditemukan
           </div>
         <?php } else { ?>
           <?php
-          foreach ($artikel as $a) {
+          foreach ($berita as $a) {
           ?>
             <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <a href="<?php echo base_url() . 'artikel/' . $a->slug_artikel; ?>" class="component-products d-block">
+              <a href="<?php echo base_url() . 'berita/' . $a->slug_berita; ?>" class="component-products d-block">
                 <div class="products-thumbnail">
                   <div class="products-image" style="
-                      background-image: url('<?= base_url() . '/gambar/artikel/' . $a->sampul_artikel; ?>');
+                      background-image: url('<?= base_url() . '/gambar/berita/' . $a->sampul_berita; ?>');
                     "></div>
                 </div>
-                <div class="products-text"><?= $a->judul_artikel; ?></div>
+                <div class="products-text"><?= $a->judul_berita; ?></div>
                 <div class="products-user"><?= $a->nama; ?></div>
-                <div class="products-price"><?= $a->tanggal_artikel; ?></div>
+                <div class="products-price"><?= $a->tanggal_berita; ?></div>
               </a>
             </div>
           <?php } ?>

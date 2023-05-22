@@ -23,8 +23,8 @@ class Dashboard extends CI_Controller
 
 	public function index()
 	{
-		// hitung jumlah artikel
-		$data['jumlah_artikel'] = $this->m_data->get_data('artikel')->num_rows();
+		// hitung jumlah berita
+		$data['jumlah_berita'] = $this->m_data->get_data('berita')->num_rows();
 		// // hitung jumlah kategori
 		$data['jumlah_kategori'] = $this->m_data->get_data('kategori')->num_rows();
 		// // hitung jumlah pengguna
@@ -393,27 +393,27 @@ class Dashboard extends CI_Controller
 	// END CRUD pengaduan
 
 
-	// CRUD ARTIKEL
-	public function artikel()
+	// CRUD BERITA
+	public function berita()
 	{
-		$data['artikel'] = $this->db->query("SELECT * FROM artikel,kategori,pengguna WHERE kategori_artikel=kategori.id and pengguna_artikel=pengguna.id order by artikel.id desc")->result();
+		$data['berita'] = $this->db->query("SELECT * FROM berita,kategori,pengguna WHERE kategori_berita=kategori.id and pengguna_berita=pengguna.id order by berita.id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
-		$this->load->view('dashboard/artikel/v_artikel', $data);
+		$this->load->view('dashboard/berita/v_berita', $data);
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
-	public function artikel_tambah()
+	public function berita_tambah()
 	{
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Berita' order by id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
-		$this->load->view('dashboard/artikel/v_artikel_tambah', $data);
+		$this->load->view('dashboard/berita/v_berita_tambah', $data);
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
-	public function artikel_aksi()
+	public function berita_aksi()
 	{
 		// Wajib isi judul,konten dan kategori
-		$this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[artikel.judul_artikel]');
+		$this->form_validation->set_rules('judul', 'Judul', 'required|is_unique[berita.judul_berita]');
 		$this->form_validation->set_rules('konten', 'Konten', 'required');
 		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
 
@@ -424,7 +424,7 @@ class Dashboard extends CI_Controller
 
 		if ($this->form_validation->run() != false) {
 
-			$config['upload_path']   = './gambar/artikel/';
+			$config['upload_path']   = './gambar/berita/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 
 			$this->load->library('upload', $config);
@@ -444,51 +444,51 @@ class Dashboard extends CI_Controller
 				$status = $this->input->post('status');
 
 				$data = array(
-					'tanggal_artikel' => $tanggal,
-					'judul_artikel' => $judul,
-					'slug_artikel' => $slug,
-					'konten_artikel' => $konten,
-					'sampul_artikel' => $sampul,
-					'pengguna_artikel' => $author,
-					'kategori_artikel' => $kategori,
-					'status_artikel' => $status,
+					'tanggal_berita' => $tanggal,
+					'judul_berita' => $judul,
+					'slug_berita' => $slug,
+					'konten_berita' => $konten,
+					'sampul_berita' => $sampul,
+					'pengguna_berita' => $author,
+					'kategori_berita' => $kategori,
+					'status_berita' => $status,
 				);
 
-				$this->m_data->insert_data($data, 'artikel');
+				$this->m_data->insert_data($data, 'berita');
 
-				redirect(base_url() . 'dashboard/artikel/artikel');
+				redirect(base_url() . 'dashboard/berita/berita');
 			} else {
 
 				$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
 
-				$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Artikel' order by kategori_id desc")->result();
+				$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Berita' order by kategori_id desc")->result();
 				$this->load->view('dashboard/layout/v_header');
-				$this->load->view('dashboard/artikel/v_artikel_tambah', $data);
+				$this->load->view('dashboard/berita/v_berita_tambah', $data);
 				$this->load->view('dashboard/layout/v_footer');
 			}
 		} else {
-			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
+			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Berita' order by id desc")->result();
 			$this->load->view('dashboard/layout/v_header');
-			$this->load->view('dashboard/artikel/v_artikel_tambah', $data);
+			$this->load->view('dashboard/berita/v_berita_tambah', $data);
 			$this->load->view('dashboard/layout/v_footer');
 		}
 	}
 
 
-	public function artikel_edit($id)
+	public function berita_edit($id)
 	{
 		$where = array(
 			'id' => $id
 		);
-		$data['artikel'] = $this->m_data->edit_data($where, 'artikel')->result();
-		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
+		$data['berita'] = $this->m_data->edit_data($where, 'berita')->result();
+		$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Berita' order by id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
-		$this->load->view('dashboard/artikel/v_artikel_edit', $data);
+		$this->load->view('dashboard/berita/v_berita_edit', $data);
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
 
-	public function artikel_update()
+	public function berita_update()
 	{
 		// Wajib isi judul,konten dan kategori
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
@@ -510,18 +510,18 @@ class Dashboard extends CI_Controller
 			);
 
 			$data = array(
-				'judul_artikel' => $judul,
-				'slug_artikel' => $slug,
-				'konten_artikel' => $konten,
-				'kategori_artikel' => $kategori,
-				'status_artikel' => $status,
+				'judul_berita' => $judul,
+				'slug_berita' => $slug,
+				'konten_berita' => $konten,
+				'kategori_berita' => $kategori,
+				'status_berita' => $status,
 			);
 
-			$this->m_data->update_data($where, $data, 'artikel');
+			$this->m_data->update_data($where, $data, 'berita');
 
 
 			if (!empty($_FILES['sampul']['name'])) {
-				$config['upload_path']   = './gambar/artikel/';
+				$config['upload_path']   = './gambar/berita/';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
 
 				$this->load->library('upload', $config);
@@ -532,59 +532,59 @@ class Dashboard extends CI_Controller
 					$gambar = $this->upload->data();
 
 					$data = array(
-						'sampul_artikel' => $gambar['file_name'],
+						'sampul_berita' => $gambar['file_name'],
 					);
 
-					$a = $this->m_data->edit_data($where, 'artikel')->row();
-					$target_file = './gambar/artikel/' . $a->artikel_sampul;
+					$a = $this->m_data->edit_data($where, 'berita')->row();
+					$target_file = './gambar/berita/' . $a->berita_sampul;
 					unlink($target_file);
 
-					$this->m_data->update_data($where, $data, 'artikel');
+					$this->m_data->update_data($where, $data, 'berita');
 
-					redirect(base_url() . 'dashboard/artikel');
+					redirect(base_url() . 'dashboard/berita');
 				} else {
 					$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
 
 					$where = array(
 						'id' => $id
 					);
-					$data['artikel'] = $this->m_data->edit_data($where, 'artikel')->result();
-					$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Artikel' order by kategori_id desc")->result();
+					$data['berita'] = $this->m_data->edit_data($where, 'berita')->result();
+					$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket='Berita' order by kategori_id desc")->result();
 					$this->load->view('dashboard/layout/v_header');
-					$this->load->view('dashboard/artikel/v_artikel_edit', $data);
+					$this->load->view('dashboard/berita/v_berita_edit', $data);
 					$this->load->view('dashboard/layout/v_footer');
 				}
 			} else {
-				redirect(base_url() . 'dashboard/artikel/artikel');
+				redirect(base_url() . 'dashboard/berita/berita');
 			}
 		} else {
 			$id = $this->input->post('id');
 			$where = array(
 				'id' => $id
 			);
-			$data['artikel'] = $this->m_data->edit_data($where, 'artikel')->result();
-			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Artikel' order by id desc")->result();
+			$data['berita'] = $this->m_data->edit_data($where, 'berita')->result();
+			$data['kategori'] = $this->db->query("SELECT * FROM kategori WHERE ket_kategori='Berita' order by id desc")->result();
 			$this->load->view('dashboard/layout/v_header');
-			$this->load->view('dashboard/artikel/v_artikel_edit', $data);
+			$this->load->view('dashboard/berita/v_berita_edit', $data);
 			$this->load->view('dashboard/layout/v_footer');
 		}
 	}
 
-	public function artikel_hapus($id)
+	public function berita_hapus($id)
 	{
 		$where = array(
 			'id' => $id
 		);
 
-		$a = $this->m_data->edit_data($where, 'artikel')->row();
-		$target_file = './gambar/artikel/' . $a->artikel_sampul;
+		$a = $this->m_data->edit_data($where, 'berita')->row();
+		$target_file = './gambar/berita/' . $a->berita_sampul;
 		unlink($target_file);
 
-		$this->m_data->delete_data($where, 'artikel');
+		$this->m_data->delete_data($where, 'berita');
 
-		redirect(base_url() . 'dashboard/artikel/artikel');
+		redirect(base_url() . 'dashboard/berita/berita');
 	}
-	// end crud artikel
+	// end crud berita
 
 	// CRUD GALLERY
 	public function gallery()
@@ -1101,16 +1101,16 @@ class Dashboard extends CI_Controller
 
 		$this->m_data->delete_data($where, 'pengguna');
 
-		// pindahkan semua artikel pengguna yang dihapus ke pengguna yang dipilih
+		// pindahkan semua berita pengguna yang dihapus ke pengguna yang dipilih
 		$w = array(
-			'pengguna_artikel' => $hapus
+			'pengguna_berita' => $hapus
 		);
 
 		$d = array(
-			'pengguna_artikel' => $tujuan
+			'pengguna_berita' => $tujuan
 		);
 
-		$this->m_data->update_data($w, $d, 'artikel');
+		$this->m_data->update_data($w, $d, 'berita');
 
 		redirect(base_url() . 'dashboard/pengguna');
 	}

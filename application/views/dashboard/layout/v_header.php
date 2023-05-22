@@ -166,7 +166,7 @@
                 </ul>
               </li>
               <!-- <li class="nav-item">
-                <a href="<?php echo base_url() . 'dashboard/profil' ?>" class="nav-link <?= $this->uri->segment(2) == 'artikel' ? 'active' : '' ?>">
+                <a href="<?php echo base_url() . 'dashboard/profil' ?>" class="nav-link <?= $this->uri->segment(2) == 'berita' ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-user"></i>
                   <p>Profil</p>
                 </a>
@@ -178,9 +178,9 @@
             if ($this->session->userdata('level') == "admin" || $this->session->userdata('level') == "penulis") {
             ?>
               <li class="nav-item">
-                <a href="<?php echo base_url() . 'dashboard/artikel' ?>" class="nav-link <?= $this->uri->segment(2) == 'artikel' ? 'active' : '' ?>">
+                <a href="<?php echo base_url() . 'dashboard/berita' ?>" class="nav-link <?= $this->uri->segment(2) == 'berita' ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-pen"></i>
-                  <p>ARTIKEL</p>
+                  <p>BERITA</p>
                 </a>
               </li>
               <li class="nav-item">

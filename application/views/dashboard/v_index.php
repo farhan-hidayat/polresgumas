@@ -18,8 +18,8 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-info">
 						<div class="inner">
-							<h3><?php echo $jumlah_artikel ?></h3>
-							<p>Jumlah Artikel</p>
+							<h3><?php echo $jumlah_berita ?></h3>
+							<p>Jumlah Berita</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-android-list"></i>

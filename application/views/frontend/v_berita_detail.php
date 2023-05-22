@@ -9,7 +9,7 @@
               <li class="breadcrumb-item">
                 <a href="<?php echo base_url() ?>">Home</a>
               </li>
-              <li class="breadcrumb-item active">Detail Artikel</li>
+              <li class="breadcrumb-item active">Detail Berita</li>
             </ol>
           </nav>
         </div>
@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col-lg-12" data-aos="zoom-in">
           <transition name="slide-fade" mode="out-in">
-            <img src="<?= base_url() . '/gambar/artikel/' . $artikel->sampul_artikel; ?>" class="w-100 main-image" alt="" />
+            <img src="<?= base_url() . '/gambar/berita/' . $berita->sampul_berita; ?>" class="w-100 main-image" alt="" />
           </transition>
         </div>
       </div>
@@ -34,9 +34,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
-            <h1><?= $artikel->judul_artikel; ?></h1>
-            <div class="owner">By <?= $artikel->nama; ?></div>
-            <div class="price"><?= $artikel->tanggal_artikel; ?></div>
+            <h1><?= $berita->judul_berita; ?></h1>
+            <div class="owner">By <?= $berita->nama; ?></div>
+            <div class="price"><?= $berita->tanggal_berita; ?></div>
           </div>
         </div>
     </section>
@@ -44,7 +44,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 ">
-            <?= $artikel->konten_artikel; ?>
+            <?= $berita->konten_berita; ?>
           </div>
         </div>
       </div>
