@@ -40,3 +40,30 @@
     </section>
   </div>
 </div>
+
+<script src="<?php echo base_url(); ?>assets/vendor/vue/vue.js"></script>
+<script>
+  var gallery = new Vue({
+    el: "#gallery",
+    mounted() {
+      AOS.init();
+    },
+    data: {
+      activePhoto: 0,
+      photos: [
+        <?php
+        $id = 1;
+        foreach ($gallery as $a) { ?> {
+            id: <?= $id++; ?>,
+            url: "<?php echo base_url() . '/gambar/satker/' . $a->foto_satker; ?>",
+          },
+        <?php } ?>
+      ],
+    },
+    methods: {
+      changeActive(id) {
+        this.activePhoto = id;
+      },
+    },
+  });
+</script>

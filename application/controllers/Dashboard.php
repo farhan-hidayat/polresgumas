@@ -777,6 +777,7 @@ class Dashboard extends CI_Controller
 
 	public function satker_aksi()
 	{
+		$data = array();
 		// Wajib isi judul,konten dan kategori
 		$this->form_validation->set_rules('nama', 'nama', 'required|is_unique[satker.nama_satker]');
 		$this->form_validation->set_rules('ket', 'ket', 'required');
@@ -785,6 +786,18 @@ class Dashboard extends CI_Controller
 		if ($this->form_validation->run() != false) {
 
 			$count = count($_FILES['files']['name']);
+			$nama = $this->input->post('nama');
+			$slug = strtolower(url_title($nama));
+			$ket = $this->input->post('ket');
+
+			$dataSatker = array(
+				'nama_satker' => $nama,
+				'slug_satker' => $slug,
+				'ket_satker' => $ket,
+			);
+
+			$this->m_data->insert_data($dataSatker, 'satker');
+			$idsatker = $this->db->query("SELECT id FROM satker order by id desc limit 1")->row('id');
 
 			for ($i = 0; $i < $count; $i++) {
 				if (!empty($_FILES['files']['name'][$i])) {
@@ -796,45 +809,52 @@ class Dashboard extends CI_Controller
 
 					$config['upload_path']   = './gambar/satker/';
 					$config['allowed_types'] = 'gif|jpg|png|jpeg';
-					$config['file_name'] = $_FILES['files']['name'][$i];
 
 					$this->load->library('upload', $config);
 					$this->upload->initialize($config);
 
 					if ($this->upload->do_upload('file')) {
 
-						// mengambil data tentang gambar
 						$gambar = $this->upload->data();
+						// $nama = $this->input->post('nama');
+						// $slug = strtolower(url_title($nama));
+						// $ket = $this->input->post('ket');
 
-						$nama = $this->input->post('nama');
-						$slug = strtolower(url_title($nama));
-						$sampul[$i] = $gambar['file_name'];
-						$ket = $this->input->post('ket');
+						// $data = array(
+						// 	'nama_satker' => $nama,
+						// 	'slug_satker' => $slug,
+						// 	'ket_satker' => $ket,
+						// );
 
-						$data = array(
-							'nama_satker' => $nama,
-							'slug_satker' => $slug,
-							'ket_satker' => $ket,
-						);
+						// $this->m_data->insert_data($data, 'satker');
 
-						$this->m_data->insert_data($data, 'satker');
-						$idsatker =
-							$this->db->query("SELECT id FROM satker order by id desc limit 1")->row('id');
-						$data1 = array(
-							'satker' => $idsatker,
-							'foto_satker' => $sampul,
-						);
-						$this->db->insert('satker', $data1);
+						// mengambil data tentang gambar
+						$data1['satker'] = $idsatker;
+						$data1['foto_satker'] = $gambar['file_name'];
+						$this->db->insert('gallery_satker', $data1);
 
-						redirect(base_url() . 'dashboard/satker/satker');
+						// redirect(base_url() . 'dashboard/satker/satker');
 					} else {
+						// $this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
 
-						$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
+						// $this->load->view('dashboard/layout/v_header');
+						// $this->load->view('dashboard/satker/v_satker_tambah', $data);
+						// $this->load->view('dashboard/layout/v_footer');
 
-						$this->load->view('dashboard/layout/v_header');
-						$this->load->view('dashboard/satker/v_satker_tambah', $data);
-						$this->load->view('dashboard/layout/v_footer');
+						$data['gambar_error'][] = $this->upload->display_errors();
 					}
+				}
+				if ($i == $count - 1) {
+					if (empty($data['gambar_error'])) {
+						redirect(base_url() . 'dashboard/satker/satker');
+					}
+
+					// ni gatau, soalnya gambar_error sdh jd array 
+					$this->form_validation->set_message('sampul', $data['gambar_error'] = $this->upload->display_errors());
+
+					$this->load->view('dashboard/layout/v_header');
+					$this->load->view('dashboard/satker/v_satker_tambah', $data);
+					$this->load->view('dashboard/layout/v_footer');
 				}
 			}
 		} else {

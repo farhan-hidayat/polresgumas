@@ -288,6 +288,8 @@ class Welcome extends CI_Controller
 		$data['jumlah_satker'] = $this->db->query("SELECT count(id) as jml FROM satker")->row('jml');
 
 		$data['satker'] = $this->db->query("SELECT * FROM satker where slug_satker='$slug'")->row();
+		$ids = $this->db->query("SELECT id FROM satker where slug_satker='$slug'")->row('id');
+		$data['gallery'] = $this->db->query("SELECT foto_satker FROM gallery_satker,satker where satker=satker.id and satker='$ids'")->result();
 
 		// data pengaturan website
 		$data['pengaturan'] = $this->m_data->get_data('pengaturan')->row();
