@@ -35,9 +35,9 @@
 										<label>Sub</label>
 										<select class="form-control" name="ket">
 											<option value="">- Pilih Sub -</option>
-											<option <?php if ($k->ket_kategori == "Artikel") {
+											<option <?php if ($k->ket_kategori == "Berita") {
 														echo "selected='selected'";
-													} ?> value="Artikel">Artikel</option>
+													} ?> value="Berita">Berita</option>
 											<option <?php if ($k->ket_kategori == "Galeri") {
 														echo "selected='selected'";
 													} ?> value="Galeri">Galeri</option>

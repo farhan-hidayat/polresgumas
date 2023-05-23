@@ -35,8 +35,8 @@
 											<td><?php echo $k->nama_kategori; ?></td>
 											<td><?php echo $k->link_aplikasi; ?></td>
 											<td>
-												<a href="<?php echo base_url() . 'dashboard/aplikasi_edit/' . $k->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-												<a href="<?php echo base_url() . 'dashboard/aplikasi_hapus/' . $k->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+												<a href="<?php echo base_url() . 'dashboard/aplikasi_edit/' . $k->app; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+												<a href="<?php echo base_url() . 'dashboard/aplikasi_hapus/' . $k->app; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 											</td>
 										</tr>
 									<?php } ?>

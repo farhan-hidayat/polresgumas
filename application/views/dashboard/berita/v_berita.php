@@ -71,15 +71,15 @@
 													// jika penulis, maka cek apakah penulis berita ini adalah si pengguna atau bukan
 													if ($this->session->userdata('id') == $a->pengguna_berita) {
 												?>
-														<a href="<?php echo base_url() . 'dashboard/berita_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-														<a href="<?php echo base_url() . 'dashboard/berita_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/berita_edit/' . $a->berita; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/berita_hapus/' . $a->berita; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 													<?php
 													}
 												} else {
 													// jika yang login adalah admin
 													?>
-													<a href="<?php echo base_url() . 'dashboard/berita_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-													<a href="<?php echo base_url() . 'dashboard/berita_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/berita_edit/' . $a->berita; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/berita_hapus/' . $a->berita; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 												<?php
 												}
 												?>

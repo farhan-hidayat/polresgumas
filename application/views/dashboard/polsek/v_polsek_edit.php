@@ -39,7 +39,8 @@
 								<div class="card-body">
 									<div class="form-group">
 										<label>Map</label>
-										<input type="text" name="map" class="form-control" placeholder="Masukkan map polsek.." value="<?php echo $a->map_polsek; ?>">
+										<!-- <input type="text" name="map" class="form-control" placeholder="Masukkan map polsek.." value="<?php echo $a->map_polsek; ?>"> -->
+										<textarea class="form-control" name="map"><?php echo $a->map_polsek; ?></textarea>
 									</div>
 								</div>
 							</div>

@@ -209,7 +209,7 @@ class Dashboard extends CI_Controller
 	// CRUD KATEGORI
 	public function aplikasi()
 	{
-		$data['aplikasi'] = $this->db->query("SELECT * FROM aplikasi,kategori WHERE kategori_aplikasi=kategori.id order by aplikasi.id desc")->result();
+		$data['aplikasi'] = $this->db->query("SELECT aplikasi.id as app, nama_aplikasi, slug_aplikasi, link_aplikasi,nama_kategori FROM aplikasi,kategori WHERE kategori_aplikasi=kategori.id order by aplikasi.id desc")->result();
 		$this->load->view('dashboard/layout/v_header', $data);
 		$this->load->view('dashboard/aplikasi/v_aplikasi', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -343,35 +343,69 @@ class Dashboard extends CI_Controller
 		$this->load->view('dashboard/layout/v_footer');
 	}
 
-	public function pengaduan_update()
+	public function pengaduan_kirim()
 	{
-		$this->form_validation->set_rules('pengaduan', 'pengaduan', 'required');
-		$this->form_validation->set_rules('ket', 'Ket', 'required');
+		$this->form_validation->set_rules('subject', 'subject', 'required');
+		$this->form_validation->set_rules('pesan', 'pesan', 'required');
 
 		if ($this->form_validation->run() != false) {
 
+			$config = array(
+				'mailtype'  => 'html',
+				'charset'   => 'utf-8',
+				'protocol'  => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_user' => 'farhanarchman@gmail.com',  // Email gmail
+				'smtp_pass'   => 'ureygajnkgathwnz',  // Password gmail
+				'smtp_port'   => 465,
+				'smtp_timeout' => 5,
+				'newline' => "\r\n"
+			);
+
 			$id = $this->input->post('id');
-			$pengaduan = $this->input->post('pengaduan');
-			$ket = $this->input->post('ket');
+			$email = $this->input->post('email');
+			$pesan = $this->input->post('pesan');
+			$subject = $this->input->post('subject');
+			$tgl = date('Y-m-d H:i:s');
 
 			$where = array(
 				'id' => $id
 			);
 
 			$data = array(
-				'nama_pengaduan' => $pengaduan,
-				'ket_pengaduan' => $ket,
-				'slug_pengaduan' => strtolower(url_title($pengaduan))
+				'balasan_pengaduan' => $pesan,
+				'tanggal_balasan' => $tgl,
+				'status_pengaduan' => 'Sudah',
 			);
 
 			$this->m_data->update_data($where, $data, 'pengaduan');
 
-			redirect(base_url() . 'dashboard/pengaduan/pengaduan');
+			// $this->load->library('email', $config);
+			$this->email->initialize($config);
+			$this->email->from($config['smtp_user']);
+			$this->email->to($email); //email penerima
+			$this->email->subject($subject); //subjek email
+			$this->email->message($pesan);
+
+			if ($this->email->send()) {
+				echo 'Sukses! email berhasil dikirim.';
+				redirect(base_url() . 'dashboard/pengaduan/pengaduan');
+			} else {
+				echo 'Error! email tidak dapat dikirim.';
+				$id = $this->input->post('id');
+				$where = array(
+					'id' => $id
+				);
+				$data['pengaduan'] = $this->m_data->edit_data($where, 'pengaduan')->result();
+				$this->load->view('dashboard/layout/v_header');
+				$this->load->view('dashboard/pengaduan/v_pengaduan_balas', $data);
+				$this->load->view('dashboard/layout/v_footer');
+			}
 		} else {
 
 			$id = $this->input->post('id');
 			$where = array(
-				'pengaduan_id' => $id
+				'id' => $id
 			);
 			$data['pengaduan'] = $this->m_data->edit_data($where, 'pengaduan')->result();
 			$this->load->view('dashboard/layout/v_header');
@@ -396,7 +430,7 @@ class Dashboard extends CI_Controller
 	// CRUD BERITA
 	public function berita()
 	{
-		$data['berita'] = $this->db->query("SELECT * FROM berita,kategori,pengguna WHERE kategori_berita=kategori.id and pengguna_berita=pengguna.id order by berita.id desc")->result();
+		$data['berita'] = $this->db->query("SELECT berita.id as berita, tanggal_berita, judul_berita, slug_berita, nama, nama_kategori, sampul_berita, status_berita FROM berita,kategori,pengguna WHERE kategori_berita=kategori.id and pengguna_berita=pengguna.id order by berita.id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/berita/v_berita', $data);
 		$this->load->view('dashboard/layout/v_footer');
@@ -969,7 +1003,7 @@ class Dashboard extends CI_Controller
 	// CRUD GALLERY
 	public function gallery()
 	{
-		$data['gallery'] = $this->db->query("SELECT * FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id order by gallery.id desc")->result();
+		$data['gallery'] = $this->db->query("SELECT gallery.id as gal, tanggal_gallery, judul_gallery, nama, nama_kategori, sampul_gallery, status_gallery FROM gallery,kategori,pengguna WHERE kategori_gallery=kategori.id and pengguna_gallery=pengguna.id order by gallery.id desc")->result();
 		$this->load->view('dashboard/layout/v_header');
 		$this->load->view('dashboard/gallery/v_gallery', $data);
 		$this->load->view('dashboard/layout/v_footer');

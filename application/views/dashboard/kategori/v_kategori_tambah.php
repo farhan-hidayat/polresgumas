@@ -33,7 +33,7 @@
 									<label>Sub</label>
 									<select class="form-control" name="ket">
 										<option value="">- Pilih Sub</option>
-										<option value="Artikel">Aktikel</option>
+										<option value="Berita">Berita</option>
 										<option value="Galeri">Galeri</option>
 										<option value="Aplikasi">Aplikasi</option>
 									</select>

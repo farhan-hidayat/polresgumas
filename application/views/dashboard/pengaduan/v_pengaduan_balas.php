@@ -23,24 +23,32 @@
 
 						<?php foreach ($pengaduan as $k) { ?>
 
-							<form method="post" action="<?php echo base_url('dashboard/pengaduan_update') ?>">
+							<form method="post" action="<?php echo base_url('dashboard/pengaduan_kirim') ?>">
 								<div class="card-body">
 									<div class="form-group">
 										<label>Nama Pengadu</label>
 										<input type="hidden" name="id" value="<?php echo $k->id; ?>">
-										<input type="text" name="pengaduan" class="form-control" placeholder="Masukkan nama pengaduan .." value="<?php echo $k->nama_pengadu; ?>">
-										<?php echo form_error('pengaduan'); ?>
+										<input type="text" name="pengadu" class="form-control" placeholder="Masukkan nama pengaduan .." value="<?php echo $k->nama_pengadu; ?>" disabled>
 									</div>
 									<div class="form-group">
 										<label>Email Pengadu</label>
-										<input type="text" name="pengaduan" class="form-control" placeholder="Masukkan nama pengaduan .." value="<?php echo $k->email_pengadu; ?>" disabled>
+										<input type="text" name="email" class="form-control" placeholder="Masukkan nama pengaduan .." value="<?php echo $k->email_pengadu; ?>" readonly>
+									</div>
+									<div class="form-group">
+										<label>Pesan</label>
+										<input type="text" name="email" class="form-control" placeholder="Masukkan nama pengaduan .." value="<?php echo $k->isi_pengaduan; ?>" disabled>
+									</div>
+									<div class="form-group">
+										<label>Subject</label>
+										<input type="text" name="subject" class="form-control" placeholder="Masukkan subject" value="<?php echo set_value('subject'); ?>">
+										<?php echo form_error('subject'); ?>
 									</div>
 									<div class="card-body">
 										<div class="form-group">
 											<label>Balasan</label>
-											<?php echo form_error('balasan'); ?>
+											<?php echo form_error('pesan'); ?>
 											<br />
-											<textarea class="form-control" id="summernote" name="balasan"> <?php echo set_value('balasan'); ?> </textarea>
+											<textarea class="form-control" id="summernote" name="pesan"> <?php echo set_value('pesan'); ?> </textarea>
 										</div>
 									</div>
 								</div>

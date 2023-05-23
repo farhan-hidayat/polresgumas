@@ -65,15 +65,15 @@
 													// jika penulis, maka cek apakah penulis artikel ini adalah si pengguna atau bukan
 													if ($this->session->userdata('id') == $a->author) {
 												?>
-														<a href="<?php echo base_url() . 'dashboard/gallery_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-														<a href="<?php echo base_url() . 'dashboard/gallery_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/gallery_edit/' . $a->gal; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+														<a href="<?php echo base_url() . 'dashboard/gallery_hapus/' . $a->gal; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 													<?php
 													}
 												} else {
 													// jika yang login adalah admin
 													?>
-													<a href="<?php echo base_url() . 'dashboard/gallery_edit/' . $a->id; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
-													<a href="<?php echo base_url() . 'dashboard/gallery_hapus/' . $a->id; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/gallery_edit/' . $a->gal; ?>" class="btn btn-warning btn-sm"> <i class="fa fa-pen"></i> </a>
+													<a href="<?php echo base_url() . 'dashboard/gallery_hapus/' . $a->gal; ?>" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i> </a>
 												<?php
 												}
 												?>
