@@ -1,7 +1,18 @@
 <!-- Footer-->
 <footer>
   <div class="container">
-    <div class="row">
+    <div class="row text-center">
+      <div class="col-md-12" style="margin-top: 20px;">
+        <a href="<?= $pengaturan->link_fb ?>" target="_blank">
+          <img src="<?= base_url(); ?>assets/images/fb.png" alt="" width="50px" />
+        </a>
+        <img src="<?= base_url(); ?>assets/images/tw.png" alt="" width="50px" />
+        </a>
+        <img src="<?= base_url(); ?>assets/images/ig.png" alt="" width="50px" />
+        </a>
+        <img src="<?= base_url(); ?>assets/images/yt.png" alt="" width="50px" />
+        </a>
+      </div>
       <div class="col-12 text-center">
         <p class="pt-4 pb-2">2022 Copyright Store. All Rights Reserved</p>
       </div>

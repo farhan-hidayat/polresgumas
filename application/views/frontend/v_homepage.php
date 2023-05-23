@@ -88,49 +88,4 @@
       </div>
     </div>
   </section>
-
-  <section class="store-trand-categories">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center" data-aos="fade-up">
-          <h5>Sosial Media</h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-          <a href="<?= $pengaturan->link_fb ?>" target="_blank" class="component-categories d-block">
-            <div class="categories-image">
-              <img src="<?= base_url(); ?>assets/images/fb.png" alt="" class="w-100" />
-              <p class="categories-text">Facebook</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-          <a href="<?= $pengaturan->link_tw ?>" target="_blank" class="component-categories d-block">
-            <div class="categories-image">
-              <img src="<?= base_url(); ?>assets/images/tw.png" alt="" class="w-100" />
-              <p class="categories-text">Twitter</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-          <a href="<?= $pengaturan->link_ig ?>" target="_blank" class="component-categories d-block">
-            <div class="categories-image">
-              <img src="<?= base_url(); ?>assets/images/ig.png" alt="" class="w-100" />
-              <p class="categories-text">Instagram</p>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-3 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-          <a href="<?= $pengaturan->link_yt ?>" target="_blank" class="component-categories d-block">
-            <div class="categories-image">
-              <img src="<?= base_url(); ?>assets/images/yt.png" alt="" class="w-100" />
-              <p class="categories-text">Youtube</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </div>

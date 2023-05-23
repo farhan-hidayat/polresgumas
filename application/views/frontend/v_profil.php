@@ -7,6 +7,8 @@
                 <br>
                 <br>
                 <center>
+                    <h2><b>Struktur Organisasi Polres Gunung Mas</b></h2>
+                    <br>
                     <img src="<?php echo base_url() . '/gambar/website/' . $pengaturan->struktur; ?>" alt="">
                     <br>
                     <br>
